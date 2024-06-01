@@ -1,0 +1,50 @@
+<RCC>
+    <qresource prefix="/">
+        <file>dline.svg</file>
+        <file>edit.svg</file>
+        <file>gubbe.svg</file>
+        <file>horn.svg</file>
+        <file>horn_small.svg</file>
+        <file>icon.svg</file>
+        <file>icon_android.svg</file>
+        <file>img.svg</file>
+        <file>l.svg</file>
+        <file>lr.svg</file>
+        <file>lr_svg.svg</file>
+        <file>minus.svg</file>
+        <file>thumb.svg</file>
+        <file>ITCKRIST.TTF</file>
+        <file>flags/france-flag-button-round-icon-128.png</file>
+        <file>flags/germany-flag-button-round-icon-128.png</file>
+        <file>flags/hungary-flag-button-round-icon-128.png</file>
+        <file>flags/italy-flag-button-round-icon-128.png</file>
+        <file>flags/norway-flag-button-round-icon-128.png</file>
+        <file>flags/poland-flag-button-round-icon-128.png</file>
+        <file>flags/russia-flag-button-round-icon-128.png</file>
+        <file>flags/south-korea-flag-button-round-icon-128.png</file>
+        <file>flags/spain-flag-button-round-icon-128.png</file>
+        <file>flags/sweden-flag-button-round-icon-128.png</file>
+        <file>flags/united-kingdom-flag-button-round-icon-128.png</file>
+    </qresource>
+    <qresource prefix="/qml">
+        <file>ButtonQuiz.qml</file>
+        <file>ButtonQuizImg.qml</file>
+        <file>ButtonQuizImgLarge.qml</file>
+        <file>ButtonTab.qml</file>
+        <file>CreateNewQuiz.qml</file>
+        <file>CrossWord.qml</file>
+        <file>DownLoad.qml</file>
+        <file>EditQuiz.qml</file>
+        <file>HangMan.qml</file>
+        <file>InputTextQuiz.qml</file>
+        <file>ListViewHi.qml</file>
+        <file>Main.qml</file>
+        <file>RectRounded.qml</file>
+        <file>TakeQuiz.qml</file>
+        <file>TextList.qml</file>
+        <file>TextListLarge.qml</file>
+        <file>WhiteText.qml</file>
+        <file>../harbour-wordquiz/qml/CrossWordFunctions.js</file>
+        <file>../harbour-wordquiz/qml/QuizFunctions.js</file>
+    </qresource>
+</RCC>

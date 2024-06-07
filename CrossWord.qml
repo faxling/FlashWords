@@ -2,8 +2,8 @@ import QtQuick 2.14
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
 
-import "../harbour-wordquiz/Qml/QuizFunctions.js" as QuizLib
-import "../harbour-wordquiz/Qml/CrossWordFunctions.js" as CWLib
+import "qrc:QuizFunctions.js" as QuizLib
+import "qrc://CrossWordFunctions.js" as CWLib
 
 Rectangle {
   id: idCrossWordItem

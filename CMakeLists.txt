@@ -9,7 +9,14 @@ find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick Multimedia Svg Xml)
 
 qt_standard_project_setup()
 
-qt_add_executable(appFlashWords
+
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    enable_language("RC")
+    set (WIN32_RESOURCES Resource.rc)
+endif()
+
+qt_add_executable(FlashWords
     main.cpp
     imagepickerandroid.cpp
     ../harbour-wordquiz/src/crosswordq.cpp
@@ -19,10 +26,12 @@ qt_add_executable(appFlashWords
     ../harbour-wordquiz/src/svgdrawing.cpp
     ../Crossword/crossword.cpp
     qml.qrc
-
+    ${WIN32_RESOURCES}
 )
 
-qt_add_qml_module(appFlashWords
+qt_add_qml_module(
+    FlashWords
+    RESOURCE_PREFIX :/
     URI FlashWords
     VERSION 1.0
     QML_FILES
@@ -32,7 +41,7 @@ qt_add_qml_module(appFlashWords
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-set_target_properties(appFlashWords PROPERTIES
+set_target_properties(FlashWords PROPERTIES
 #    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appFlashWords
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -40,7 +49,7 @@ set_target_properties(appFlashWords PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appFlashWords
+target_link_libraries(FlashWords
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Core
     PRIVATE Qt6::Multimedia
@@ -48,8 +57,9 @@ target_link_libraries(appFlashWords
     PRIVATE Qt6::Xml
 )
 
+
 include(GNUInstallDirs)
-install(TARGETS appFlashWords
+install(TARGETS FlashWords
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

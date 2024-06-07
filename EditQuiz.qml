@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
-import QtQML.XmlListModel
-import "../harbour-wordquiz/Qml/QuizFunctions.js" as QuizLib
+import "qrc:QuizFunctions.js" as QuizLib
 
 Item {
   id: idEditQuiz
@@ -31,10 +30,7 @@ Item {
         TextListLarge {
           id: idTextTrans
           Component.onCompleted: MyDownloader.storeTransText(idTextTrans,
-                                                             idErrorText,
-                                                             idTrTextModel,
-                                                             idTrSynModel,
-                                                             idTrMeanModel)
+                                                             idErrorText,idDicList)
 
           text: "-"
           onTextChanged: QuizLib.assignTextInputField(idTextTrans.text)
@@ -178,7 +174,6 @@ Item {
         id: idDicList
         width: parent.width / 2
         height: parent.height
-        model: idTrTextModel
         highlightFollowsCurrentItem: true
 
         delegate: Row {
@@ -186,28 +181,34 @@ Item {
           TextListLarge {
             id: idSearchItem
             width: idDicList.width
-            text: text1 + " " + (count1 > 0 ? "..." : "")
+            text: modelData
+
             MouseArea {
               anchors.fill: parent
               onClicked: {
                 idDicList.currentIndex = index
-                var sText = idSearchItem.text.replace("...", "")
+                var sText = idSearchItem.text
                 QuizLib.assignTextInputField(sText)
-                idTrSynModel.query = "/DicResult/def/tr[" + (index + 1) + "]/syn"
-                idTrMeanModel.query = "/DicResult/def/tr[" + (index + 1) + "]/mean"
+                idSynListView.model = MyDownloader.synListFromWord(sText)
+                idMeanListView.model = MyDownloader.meanListFromWord(sText)
+
+                //idTrSynModel.query = "/DicResult/def/tr[" + (index + 1) + "]/syn"
+                // idTrMeanModel.query = "/DicResult/def/tr[" + (index + 1) + "]/mean"
               }
             }
           }
         }
       }
+
       ListView {
-        model: idTrSynModel
+        //model: idTrSynModel
+        id:idSynListView
         width: parent.width / 3
         height: parent.height
         clip: true
         delegate: TextListLarge {
           id: idSynText
-          text: syn
+          text: modelData
           MouseArea {
             anchors.fill: parent
             onClicked: QuizLib.assignTextInputField(idSynText.text)
@@ -216,16 +217,14 @@ Item {
         ScrollBar.vertical: ScrollBar {}
       }
       ListView {
-        model: idTrMeanModel
+        id:idMeanListView
+        // model: idTrMeanModel
         width: parent.width / 3
         height: parent.height
         clip: true
         delegate: TextListLarge {
           id: idMeanText
-          text: mean
-          onClick: {
-            QuizLib.assignTextInputField(idMeanText.text)
-          }
+          text: modelData
         }
       }
     }
@@ -509,47 +508,6 @@ Item {
     }
     onCloseClicked: {
       idImagePick.visible = false
-    }
-  }
-
-  XmlListModel {
-    id: idTrTextModel
-    onStatusChanged: {
-      if (status === XmlListModel.Ready) {
-        if (idTrTextModel.count <= 0) {
-          idTextTrans.text = "-"
-          return
-        }
-
-        idTrSynModel.query = "/DicResult/def/tr[1]/syn"
-        idTrMeanModel.query = "/DicResult/def/tr[1]/mean"
-      }
-    }
-
-    query: "/DicResult/def/tr"
-    XmlRole {
-      name: "count1"
-      query: "count(syn)"
-    }
-    XmlRole {
-      name: "text1"
-      query: "text/string()"
-    }
-  }
-
-  XmlListModel {
-    id: idTrSynModel
-    XmlRole {
-      name: "syn"
-      query: "text/string()"
-    }
-  }
-
-  XmlListModel {
-    id: idTrMeanModel
-    XmlRole {
-      name: "mean"
-      query: "text/string()"
     }
   }
 }

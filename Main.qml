@@ -1,9 +1,9 @@
 ﻿import QtQuick
 import QtQuick.Window
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 
 import QtQuick.LocalStorage as Sql
-import "qrc://QuizFunctions.js" as QuizLib
+import "qrc:QuizFunctions.js" as QuizLib
 import "qrc://CrossWordFunctions.js" as CWLib
 
 Window {

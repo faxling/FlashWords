@@ -25,6 +25,23 @@
         <file>flags/spain-flag-button-round-icon-128.png</file>
         <file>flags/sweden-flag-button-round-icon-128.png</file>
         <file>flags/united-kingdom-flag-button-round-icon-128.png</file>
+        <file>refresh.png</file>
+        <file>quit.png</file>
+        <file>horn.png</file>
+        <file>cover.png</file>
+        <file>edit.png</file>
+        <file>help.png</file>
+        <file>horn_small.png</file>
+        <file>hornbig.png</file>
+        <file>img.png</file>
+        <file>info.png</file>
+        <file>left.png</file>
+        <file>r.png</file>
+        <file>rm.png</file>
+        <file>thumb.png</file>
+        <file>thumb_small.png</file>
+        <file>../harbour-wordquiz/qml/CrossWordFunctions.js</file>
+        <file alias="QuizFunctions.js">../harbour-wordquiz/qml/QuizFunctions.js</file>
     </qresource>
     <qresource prefix="/qml">
         <file>ButtonQuiz.qml</file>
@@ -44,7 +61,5 @@
         <file>TextList.qml</file>
         <file>TextListLarge.qml</file>
         <file>WhiteText.qml</file>
-        <file>../harbour-wordquiz/qml/CrossWordFunctions.js</file>
-        <file>../harbour-wordquiz/qml/QuizFunctions.js</file>
     </qresource>
 </RCC>

@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import "../harbour-wordquiz/Qml/QuizFunctions.js" as QuizLib
+import "qrc:QuizFunctions.js" as QuizLib
 import QtQuick.Window
 
 Item {

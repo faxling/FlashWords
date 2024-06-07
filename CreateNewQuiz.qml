@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.LocalStorage  as Sql
-import "../harbour-wordquiz/Qml/QuizFunctions.js" as QuizLib
+import "qrc:QuizFunctions.js" as QuizLib
 
 Item {
   property var oFilteredQListModel

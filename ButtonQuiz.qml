@@ -1,5 +1,6 @@
 import QtQuick
-import QtQuick.Controls
+// import QtQuick.Controls
+import QtQuick.Controls.Basic
 
 Button {
   id: idButtonQuiz
@@ -16,11 +17,11 @@ Button {
   }
 
   background: Rectangle {
-    border.width: control.activeFocus ? 2 : 1
+    border.width: activeFocus ? 2 : 1
     border.color: "#888"
     radius: 4
     color: {
-      if (control.pressed)
+      if (idButtonQuiz.down)
         return "steelblue"
 
       if (bProgVisible)
@@ -33,6 +34,10 @@ Button {
     }
   }
 
+
+  font.pointSize: nButtonFontSize
+  text: control.text
+/*
   contentItem: Text {
     id: idTextLabel
     renderType: Text.NativeRendering
@@ -47,4 +52,5 @@ Button {
       onWidthChanged: idButtonQuiz.nTextWidth = width
     }
   }
+  */
 }

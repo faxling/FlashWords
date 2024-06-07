@@ -1,0 +1,31 @@
+#include <windows.h>
+
+IDI_ICON1		ICON		DISCARDABLE	"harbour-wordquiz.ico"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION 1,6,0,0
+PRODUCTVERSION 1,6,0,0
+FILEFLAGSMASK 0x3fL
+
+FILEOS VOS__WINDOWS32
+FILETYPE VFT_DLL
+FILESUBTYPE 0x0L
+BEGIN
+BLOCK "StringFileInfo"
+BEGIN
+BLOCK "080904B0"
+BEGIN
+VALUE "CompanyName", "SoftFrax"
+VALUE "FileDescription", "WordQuiz Studio"
+VALUE "FileVersion", "1.6"
+VALUE "LegalCopyright", "SoftFrax"
+VALUE "OriginalFilename", "glosquiz.exe"
+VALUE "ProductName", "WordQuiz"
+VALUE "ProductVersion", "1.6"
+END
+END
+BLOCK "VarFileInfo"
+BEGIN
+VALUE "Translation", 0x809, 1200
+END
+END

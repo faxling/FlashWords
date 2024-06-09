@@ -31,6 +31,7 @@
         <file>cover.png</file>
         <file>edit.png</file>
         <file>help.png</file>
+        <file>flip.png</file>
         <file>horn_small.png</file>
         <file>hornbig.png</file>
         <file>img.png</file>
@@ -61,5 +62,7 @@
         <file>TextList.qml</file>
         <file>TextListLarge.qml</file>
         <file>WhiteText.qml</file>
+        <file>QuestionPanel.qml</file>
+        <file>QuestionPanelRect.qml</file>
     </qresource>
 </RCC>

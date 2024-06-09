@@ -259,7 +259,7 @@ Window {
           contentItem: Text {
             text: modelData
             // color: "#21be2b"
-            font.pointSize: 10
+            font.pixelSize: control3.nFontPixSize
             verticalAlignment: Text.AlignVCenter
           }
 
@@ -269,7 +269,7 @@ Window {
         contentItem: Item {
           Text {
             text: control3.text
-            font.pointSize: 10
+             font.pixelSize:  control3.nFontPixSize
             anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter

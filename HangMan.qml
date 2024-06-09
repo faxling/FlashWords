@@ -43,7 +43,7 @@ Item {
     SvgDrawing {
       id: idDrawing
       anchors.fill: parent
-      anchors.topMargin: 40
+      anchors.topMargin: 60
     }
 
     Row {
@@ -100,7 +100,6 @@ Item {
       enabled: idFlagImg.visible
       anchors.fill: idFlagImg
       onClicked: {
-
         bIsReverseHang = !bIsReverseHang
         QuizLib.hangUpdateImage()
       }
@@ -195,6 +194,7 @@ Item {
       anchors.bottomMargin: 20
       text: idTTrans.visible ? "New" : "New Game"
       onClicked: {
+        idFlagImg.visible = true
         idDrawing.renderId(1)
         QuizLib.hangAddWord()
       }
@@ -225,13 +225,10 @@ Item {
       anchors.bottom: parent.bottom
       anchors.bottomMargin: 20
       source: "qrc:horn.png"
-      onClicked: {
-        let sL = bIsReverseHang ? sToLang : sFromLang
-        MyDownloader.playWord(sHangWord, sL)
-      }
+      onClicked: QuizLib.playHangWord()
     }
 
-// Flash result
+    // Flash result
     Timer {
       id: idResultMsgTimer
       interval: 600
@@ -271,6 +268,7 @@ Item {
       x: 20
       anchors.top: idErrorDialogHangMan.bottomClose
     }
+
     onCloseClicked: {
       idErrorDialogHangMan.visible = false
     }

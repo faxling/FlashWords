@@ -2,13 +2,14 @@
 import QtQuick.Window
 import QtQuick.Controls.Basic
 
-import QtQuick.LocalStorage as Sql
+import QtQuick.LocalStorage 2.0 as Sql
 import "qrc:QuizFunctions.js" as QuizLib
-import "qrc://CrossWordFunctions.js" as CWLib
+import "qrc:CrossWordFunctions.js" as CWLib
 
 Window {
 
   id: idWindow
+  property int nLastIndexMain
   // init in initUrls
   property string sReqDictUrlBase
   property string sReqDictUrl
@@ -42,7 +43,7 @@ Window {
   // or 0-2
   property int nQuizIndex1_3: 1
   property int nLastQuizIndex1_3: -1
-  property int nFontSize: idWindow.height > 1200 ? 14 : 11
+  property int nFontSize: idWindow.height > 1200 ? 25 : 17
   property int nDlgHeight: idWindow.height / 5 + 80
   property int nDlgHeightLarge: idWindow.height / 2.5
   property int nBtnHeight: idWindow.height / 15
@@ -72,7 +73,7 @@ Window {
   // property int nGlosaDbLastIndex:  -1
   //  color: "#E5E7E9"
   property int nGlosaTakeQuizIndex: -1
-  property int nLastIndexMain: 0
+  property int nLastIndexMainX: 0
   FontLoader {
     id: webFont
     source: "qrc:ITCKRIST.TTF"

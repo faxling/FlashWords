@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick
 import "qrc:QuizFunctions.js" as QuizLib
 
 Flipable {
@@ -23,7 +23,7 @@ Flipable {
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.top: idImageAllok.bottom
       anchors.topMargin: 20
-      nButtonFontSize: 20
+      // nButtonFontSize: 20
       onClicked: {
         QuizLib.resetQuiz()
       }

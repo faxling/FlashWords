@@ -82,7 +82,7 @@ Item {
       width: n25BtnWidth
       anchors.centerIn: parent
       text: "Start"
-      nButtonFontSize: 20
+      // nButtonFontSize: 20
       onClicked: {
         idDrawing.renderId(1)
         QuizLib.hangAddWord()

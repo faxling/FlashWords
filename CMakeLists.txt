@@ -1,15 +1,14 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
-project(FlashWords VERSION 0.1 LANGUAGES CXX)
+
+project(FlashWords VERSION 1.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick Multimedia Svg Xml)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick Multimedia Svg Xml WebView)
 
 qt_standard_project_setup()
-
-
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     enable_language("RC")
@@ -29,6 +28,7 @@ qt_add_executable(FlashWords
     ${WIN32_RESOURCES}
 )
 
+
 qt_add_qml_module(
     FlashWords
     RESOURCE_PREFIX :/
@@ -36,6 +36,7 @@ qt_add_qml_module(
     VERSION 1.0
     QML_FILES
     RESOURCES qml.qrc
+    RESOURCES android/AndroidManifest.xml
 
 )
 
@@ -49,6 +50,8 @@ set_target_properties(FlashWords PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+
+
 target_link_libraries(FlashWords
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Core
@@ -57,10 +60,31 @@ target_link_libraries(FlashWords
     PRIVATE Qt6::Xml
 )
 
+set_property(TARGET FlashWords APPEND PROPERTY
+    QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
+)
+
+
+
 
 include(GNUInstallDirs)
+
 install(TARGETS FlashWords
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+message(STATUS "android api=${CMAKE_ANDROID_NDK_VERSION}")
+message(STATUS "version=${PROJECT_NAME} ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
+
+if (ANDROID)
+    set_property(TARGET FlashWords PROPERTY QT_ANDROID_EXTRA_LIBS
+          c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/${CMAKE_ANDROID_ARCH_ABI}/libcrypto_3.so
+          c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/${CMAKE_ANDROID_ARCH_ABI}/libssl_3.so)
+
+endif()
+
+
+
+

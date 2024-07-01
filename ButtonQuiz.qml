@@ -8,7 +8,7 @@ Button {
   height: nBtnHeight
   property bool bProgVisible
   property bool bIsPressedIn: false
-  property int nButtonFontSize: nFontSize
+  property int nButtonFontSize: idWindow.width / 30
   property int nTextWidth
 
   BusyIndicator {
@@ -35,7 +35,7 @@ Button {
   }
 
 
-  font.pointSize: nButtonFontSize
+  font.pixelSize: nButtonFontSize
   text: control.text
 /*
   contentItem: Text {

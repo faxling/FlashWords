@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 TabButton {
   id: control2
 
-  property int nFontPixSize : Screen.width / 70
+  property int nFontPixSize : idWindow.width / 25
 
   background: Rectangle {
     color: control2.checked ?"#626567" :"#BDC3C7"

@@ -1,10 +1,10 @@
 ﻿import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.Basic
-
-import QtQuick.LocalStorage 2.0 as Sql
+import QtQuick.LocalStorage as Sql
 import "qrc:QuizFunctions.js" as QuizLib
 import "qrc:CrossWordFunctions.js" as CWLib
+import QtWebView
 
 Window {
 
@@ -39,11 +39,12 @@ Window {
   property string sQuizDate: "-"
   property string sQuizDesc: "-"
   property string sScoreText: "-"
+  property string sWebViewTitle
   property int nDbNumber: 0
   // or 0-2
   property int nQuizIndex1_3: 1
   property int nLastQuizIndex1_3: -1
-  property int nFontSize: idWindow.height > 1200 ? 25 : 17
+  property int nFontSize:  17
   property int nDlgHeight: idWindow.height / 5 + 80
   property int nDlgHeightLarge: idWindow.height / 2.5
   property int nBtnHeight: idWindow.height / 15
@@ -69,7 +70,6 @@ Window {
   property bool bCWBusy: false
 
   property var glosModelIndex
-
   // property int nGlosaDbLastIndex:  -1
   //  color: "#E5E7E9"
   property int nGlosaTakeQuizIndex: -1
@@ -78,7 +78,20 @@ Window {
     id: webFont
     source: "qrc:ITCKRIST.TTF"
   }
+  property int nLastIndex
 
+  function loadInView(sTitle,sUrl)
+  {
+    idWebEngineView.url = sUrl
+    sWebViewTitle = sTitle
+    // idWebEngineView.title = sTitle
+    if (idSwipeView.currentIndex !== 5) {
+      nLastIndex = idSwipeView.currentIndex
+      idSwipeView.currentIndex = 5
+    } else {
+      idSwipeView.currentIndex = nLastIndex
+    }
+  }
   // Called from c++ event loop
   function onBackPressedTab() {
 
@@ -192,9 +205,12 @@ Window {
     TextList {
       id: idTitle
       font.italic: idGlosModelIndex.count === 0
-      anchors.verticalCenter: idBtnHelp.verticalCenter
+      y: idBtnHelp.y
       anchors.horizontalCenter: parent.horizontalCenter
       text: {
+        if (idSwipeView.currentIndex === 5)
+          return sWebViewTitle
+
         if (idGlosModelIndex.count === 0)
           return "No Quiz create one or download"
 
@@ -203,15 +219,34 @@ Window {
     }
 
     ButtonQuizImg {
+      id: idBtnBack
+      visible: idSwipeView.currentIndex === 5
+      anchors.right: idBtnHelp.left
+      anchors.rightMargin: 40
+      anchors.top: parent.top
+      anchors.topMargin: 5
+      source:  "qrc:back.png"
+      onClicked: {
+        idWebEngineView.goBack()
+      }
+
+    }
+
+    ButtonQuizImg {
       id: idBtnHelp
       anchors.right: parent.right
       anchors.rightMargin: 40
       anchors.top: parent.top
       anchors.topMargin: 5
-      source: "qrc:help.png"
-      onClicked: Qt.openUrlExternally(
-                   "https://faxling.github.io/WordQuizWin/index.html")
+      source: idSwipeView.currentIndex === 5 ? "qrc:quit.png" : "qrc:help.png"
+      onClicked: {
+        loadInView("Instructions","https://faxling.github.io/WordQuizWin/index.html")
+      }
+      //onClicked: Qt.openUrlExternally(
+      //              "https://faxling.github.io/WordQuizWin/index.html")
     }
+
+
   }
 
 
@@ -226,12 +261,12 @@ Window {
     id: idTabMain
     clip: true
     anchors.fill: parent
-    anchors.leftMargin: 50
-    anchors.rightMargin: 50
+    anchors.leftMargin: 10
+    anchors.rightMargin: 10
     anchors.bottomMargin: nBtnHeight / 2
     anchors.topMargin: idMainTitle.height + 10
     implicitWidth: 200
-    contentHeight: Screen.height / 20
+    contentHeight: idWindow.height / 20
     background: Item {}
     ButtonTab {
       id: control1
@@ -270,7 +305,7 @@ Window {
         contentItem: Item {
           Text {
             text: control3.text
-             font.pixelSize:  control3.nFontPixSize
+            font.pixelSize: control3.nFontPixSize
             anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -331,6 +366,11 @@ Window {
 
     CrossWord {
       id: idTab5
+    }
+
+     WebView {
+      id:idWebEngineView
+      url: "https://faxling.github.io/WordQuizWin/index.html"
     }
 
     Rectangle {

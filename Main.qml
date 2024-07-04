@@ -1,6 +1,7 @@
 ﻿import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.Basic
+import QtQuick.Dialogs
 import QtQuick.LocalStorage as Sql
 import "qrc:QuizFunctions.js" as QuizLib
 import "qrc:CrossWordFunctions.js" as CWLib
@@ -44,7 +45,7 @@ Window {
   // or 0-2
   property int nQuizIndex1_3: 1
   property int nLastQuizIndex1_3: -1
-  property int nFontSize:  17
+  property int nFontSize: 17
   property int nDlgHeight: idWindow.height / 5 + 80
   property int nDlgHeightLarge: idWindow.height / 2.5
   property int nBtnHeight: idWindow.height / 15
@@ -80,8 +81,7 @@ Window {
   }
   property int nLastIndex
 
-  function loadInView(sTitle,sUrl)
-  {
+  function loadInView(sTitle, sUrl) {
     idWebEngineView.url = sUrl
     sWebViewTitle = sTitle
     // idWebEngineView.title = sTitle
@@ -92,6 +92,8 @@ Window {
       idSwipeView.currentIndex = nLastIndex
     }
   }
+
+
   // Called from c++ event loop
   function onBackPressedTab() {
 
@@ -225,11 +227,10 @@ Window {
       anchors.rightMargin: 40
       anchors.top: parent.top
       anchors.topMargin: 5
-      source:  "qrc:back.png"
+      source: "qrc:back.png"
       onClicked: {
         idWebEngineView.goBack()
       }
-
     }
 
     ButtonQuizImg {
@@ -240,13 +241,12 @@ Window {
       anchors.topMargin: 5
       source: idSwipeView.currentIndex === 5 ? "qrc:quit.png" : "qrc:help.png"
       onClicked: {
-        loadInView("Instructions","https://faxling.github.io/WordQuizWin/index.html")
+        loadInView("Instructions",
+                   "https://faxling.github.io/WordQuizWin/index.html")
       }
       //onClicked: Qt.openUrlExternally(
       //              "https://faxling.github.io/WordQuizWin/index.html")
     }
-
-
   }
 
 
@@ -347,6 +347,7 @@ Window {
     width: idTabMain.width
     interactive: false
 
+
     CreateNewQuiz {
       id: idTab1
     }
@@ -368,8 +369,8 @@ Window {
       id: idTab5
     }
 
-     WebView {
-      id:idWebEngineView
+    WebView {
+      id: idWebEngineView
       url: "https://faxling.github.io/WordQuizWin/index.html"
     }
 

@@ -13,11 +13,10 @@
 #include <QQuickImageProvider>
 #include <QStandardPaths>
 #include <QWindow>
+#include <QtCore/private/qandroidextras_p.h>
+#include <QJniObject>
 
-#ifdef Q_OS_ANDROID
-#include "imagepickerandroid.h"
-#endif
-
+// elmal2024
 // "sqlite3.exe .open
 // c:/Users/fraxl/AppData/Local/glosquiz/QML/OfflineStorage/Databases/2db1346274c33ae632adc881bdcd2f8e.sqlite"
 
@@ -72,10 +71,7 @@ public:
     m_p = new Speechdownloader(offlineStoragePath(), nullptr);
     rootContext()->setContextProperty("MyDownloader", m_p);
     rootContext()->setContextProperty("CrossWordQ", new CrossWordQ);
-#ifdef Q_OS_ANDROID
-    auto pIP = new ImagePickerAndroid(m_p);
-    rootContext()->setContextProperty("MyImagePicker", pIP);
-#endif
+
     connect(m_p, &Speechdownloader::downloadImage, m_p, &Speechdownloader::downloadImageSlot);
     connect(this, &Engine::objectCreated, [=](QObject* object, const QUrl&) {
       if (object != nullptr)
@@ -142,6 +138,7 @@ int main(int argc, char* argv[])
   app.setWindowIcon(QIcon("qrc:horn.png"));
 
   oLS.LoadLast();
+
 #ifdef Q_OS_ANDROID
 
   auto oRunner = QNativeInterface::QAndroidApplication::runOnAndroidMainThread([&]() {

@@ -17,7 +17,6 @@ endif()
 
 qt_add_executable(FlashWords
     main.cpp
-    imagepickerandroid.cpp
     ../harbour-wordquiz/src/crosswordq.cpp
     ../harbour-wordquiz/src/Filehelpers.cpp
     ../harbour-wordquiz/src/speechdownloader.cpp
@@ -33,11 +32,10 @@ qt_add_qml_module(
     FlashWords
     RESOURCE_PREFIX :/
     URI FlashWords
-    VERSION 1.0
+    VERSION 1.1
     QML_FILES
     RESOURCES qml.qrc
     RESOURCES android/AndroidManifest.xml
-
 )
 
 
@@ -58,6 +56,7 @@ target_link_libraries(FlashWords
     PRIVATE Qt6::Multimedia
     PRIVATE Qt6::Svg
     PRIVATE Qt6::Xml
+    PRIVATE Qt6::CorePrivate
 )
 
 set_property(TARGET FlashWords APPEND PROPERTY
@@ -86,5 +85,5 @@ if (ANDROID)
 endif()
 
 
-
-
+qt_android_generate_deployment_settings(FlashWords)
+qt6_finalize_target(FlashWords)

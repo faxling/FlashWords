@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
+import QtQuick.Dialogs
+import QtCore
 import "qrc:QuizFunctions.js" as QuizLib
 
 Item {
@@ -30,7 +32,8 @@ Item {
         TextListLarge {
           id: idTextTrans
           Component.onCompleted: MyDownloader.storeTransText(idTextTrans,
-                                                             idErrorText,idDicList)
+                                                             idErrorText,
+                                                             idDicList)
 
           text: "-"
           onTextChanged: QuizLib.assignTextInputField(idTextTrans.text)
@@ -202,7 +205,7 @@ Item {
 
       ListView {
         //model: idTrSynModel
-        id:idSynListView
+        id: idSynListView
         width: parent.width / 3
         height: parent.height
         clip: true
@@ -217,7 +220,7 @@ Item {
         ScrollBar.vertical: ScrollBar {}
       }
       ListView {
-        id:idMeanListView
+        id: idMeanListView
         // model: idTrMeanModel
         width: parent.width / 3
         height: parent.height
@@ -427,6 +430,32 @@ Item {
       anchors.rightMargin: 20
     }
 
+    FileDialog {
+      id: fileDialog
+       nameFilters: ["Images (*.png *.jpg *.jpeg)"]
+      Component.onCompleted: console.log(StandardPaths.standardLocations(
+                                           StandardPaths.PicturesLocation))
+      options: FileDialog.DontUseNativeDialog
+
+      onCurrentFileChanged: {
+        idEditWordImage.visible = true
+        idEditWordImage.source = currentFile
+
+        console.log("file xx " + currentFiles)
+
+      }
+
+      currentFolder: "file:///storage/emulated/0/Download"
+      onAccepted: {
+
+
+        MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text, sFromLang,
+                                       idTextEdit2.text, sToLang,true)
+
+
+      }
+    }
+
     ButtonQuiz {
       id: idBtnImg
       width: n5BtnWidth
@@ -436,14 +465,18 @@ Item {
       anchors.rightMargin: 20
       text: "Image"
       onClicked: {
-        if (typeof MyImagePicker === "undefined") {
-          idImagePick.visible = true
-        } else {
+ 
+
+          fileDialog.open()
+
           MyImagePicker.pickImage(idTextEdit1.text, sFromLang,
                                   idTextEdit2.text, sToLang)
+
+
+                                  */
         }
       }
-    }
+
 
     ButtonQuiz {
       id: idBtnUpdate
@@ -504,7 +537,7 @@ Item {
       id: idWhiteText
       text: "Use Drag and Drop for images"
       x: 20
-      anchors.top: idImagePick.bottomClose
+      // anchors.top: idImagePick.bottom
     }
     onCloseClicked: {
       idImagePick.visible = false

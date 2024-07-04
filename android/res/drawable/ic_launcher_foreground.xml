@@ -2,8 +2,8 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="148.8372"
-    android:viewportHeight="148.8372">
+    android:viewportWidth="192"
+    android:viewportHeight="192">
   <group android:translateX="10.418605"
       android:translateY="10.418605">
     <path

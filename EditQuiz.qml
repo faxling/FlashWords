@@ -440,8 +440,7 @@ Item {
       onCurrentFileChanged: {
         idEditWordImage.visible = true
         idEditWordImage.source = currentFile
-
-        console.log("file xx " + currentFiles)
+        console.log("file image dialog " + currentFiles)
       }
 
       currentFolder: "file:///storage/emulated/0/Download"
@@ -462,6 +461,7 @@ Item {
       anchors.rightMargin: 20
       text: "Image"
       onClicked: {
+        MyDownloader.requestPerm()
 
         fileDialog.open()
 

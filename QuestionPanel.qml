@@ -10,27 +10,33 @@ Flipable {
   front: QuestionPanelRect {
 
     Image {
-      id:idImageAllok
+      id: idImageAllok
       visible: allOk1_3
       anchors.centerIn: parent
       source: "qrc:thumb.png"
     }
 
+    TextMetrics {
+      id: t_metrics
+      font: idTextOneMoreTime.font
+      text: idTextOneMoreTime.text + "XXX"
+    }
+
     ButtonQuiz {
+      id: idTextOneMoreTime
       visible: allOk1_3
       text: "One more time?"
-      width: nTextWidth + nTextWidth / 5
+      width: t_metrics.width
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.top: idImageAllok.bottom
       anchors.topMargin: 20
-      // nButtonFontSize: 20
       onClicked: {
         QuizLib.resetQuiz()
       }
     }
 
     Item {
-      id:idFrontItem
+      id: idFrontItem
       visible: !allOk1_3
       anchors.fill: parent
       ButtonQuizImg {
@@ -77,6 +83,7 @@ Flipable {
         anchors.rightMargin: 20
         anchors.top: idTextBtn.bottom
         anchors.topMargin: 20
+        bIsPushed: bImageMode
         source: "qrc:img.png"
         onClicked: bImageMode = !bImageMode
       }
@@ -144,7 +151,7 @@ Flipable {
           opacity: bVoiceMode ? 0 : 1
           font.pointSize: 30
           font.bold: true
-           horizontalAlignment: Text.AlignHCenter
+          horizontalAlignment: Text.AlignHCenter
           anchors.horizontalCenter: parent.horizontalCenter
           text: question
         }
@@ -152,8 +159,8 @@ Flipable {
         ButtonQuizImgLarge {
           id: idBtnAnswer
           focus: false
-  //        fillMode: Image.Pad
-          source:"qrc:flip.png"
+          //        fillMode: Image.Pad
+          source: "qrc:flip.png"
           anchors.horizontalCenter: parent.horizontalCenter
           onClicked: {
             QuizLib.toggleAnswerVisible()
@@ -179,7 +186,7 @@ Flipable {
 
       ButtonQuizImgLarge {
         anchors.horizontalCenter: parent.horizontalCenter
-        source:"qrc:flip.png"
+        source: "qrc:flip.png"
         // text: "Show Answer"
         onClicked: QuizLib.toggleAnswerVisible()
       }

@@ -9,7 +9,6 @@ Button {
   property bool bProgVisible
   property bool bIsPressedIn: false
   property int nButtonFontSize: idWindow.width / 30
-  property int nTextWidth
 
   BusyIndicator {
     anchors.centerIn: parent
@@ -35,6 +34,7 @@ Button {
   }
 
 
+
   font.pixelSize: nButtonFontSize
   text: control.text
 /*
@@ -45,12 +45,7 @@ Button {
     horizontalAlignment: Text.AlignHCenter
     font.pointSize: nButtonFontSize
     text: control.text
-    TextMetrics {
-      id: t_metrics
-      font: idTextLabel.font
-      text: idTextLabel.text
-      onWidthChanged: idButtonQuiz.nTextWidth = width
-    }
+
   }
   */
 }

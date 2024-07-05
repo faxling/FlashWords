@@ -147,14 +147,13 @@ Item {
       }
     }
 
-    ButtonQuiz {
+    ButtonQuizImgLarge {
       id: idHangBtn2
       y: idCharRect.y
-      width: height
+      source: "qrc:enter.png"
       anchors.left: idCharRect.right
       anchors.leftMargin: 10
       visible: !idHangBtn.visible
-      text: "Enter"
       onClicked: {
         QuizLib.hangEnterChar()
       }

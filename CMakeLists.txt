@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 
-project(FlashWords VERSION 1.1 LANGUAGES CXX)
+project(FlashWords VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
@@ -32,7 +32,7 @@ qt_add_qml_module(
     FlashWords
     RESOURCE_PREFIX :/
     URI FlashWords
-    VERSION 1.1
+    VERSION 1.0
     QML_FILES
     RESOURCES qml.qrc
     RESOURCES android/AndroidManifest.xml

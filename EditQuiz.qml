@@ -432,7 +432,7 @@ Item {
 
     FileDialog {
       id: fileDialog
-       nameFilters: ["Images (*.png *.jpg *.jpeg)"]
+      nameFilters: ["Images (*.png *.jpg *.jpeg)"]
       Component.onCompleted: console.log(StandardPaths.standardLocations(
                                            StandardPaths.PicturesLocation))
       options: FileDialog.DontUseNativeDialog
@@ -442,17 +442,14 @@ Item {
         idEditWordImage.source = currentFile
 
         console.log("file xx " + currentFiles)
-
       }
 
       currentFolder: "file:///storage/emulated/0/Download"
       onAccepted: {
 
-
-        MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text, sFromLang,
-                                       idTextEdit2.text, sToLang,true)
-
-
+        MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text,
+                                       sFromLang, idTextEdit2.text,
+                                       sToLang, true)
       }
     }
 
@@ -465,18 +462,13 @@ Item {
       anchors.rightMargin: 20
       text: "Image"
       onClicked: {
- 
 
-          fileDialog.open()
+        fileDialog.open()
 
-          MyImagePicker.pickImage(idTextEdit1.text, sFromLang,
-                                  idTextEdit2.text, sToLang)
-
-
-                                  */
-        }
+        MyImagePicker.pickImage(idTextEdit1.text, sFromLang,
+                                idTextEdit2.text, sToLang)
       }
-
+    }
 
     ButtonQuiz {
       id: idBtnUpdate

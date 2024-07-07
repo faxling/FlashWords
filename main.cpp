@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFile>
 #include <QGuiApplication>
+#include <QJniObject>
 #include <QKeyEvent>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -14,7 +15,6 @@
 #include <QStandardPaths>
 #include <QWindow>
 #include <QtCore/private/qandroidextras_p.h>
-#include <QJniObject>
 
 // elmal2024
 // "sqlite3.exe .open
@@ -122,6 +122,7 @@ public:
 int main(int argc, char* argv[])
 {
 
+  QCoreApplication::setOrganizationName("softax");
   QGuiApplication app(argc, argv);
 
   Engine engine;

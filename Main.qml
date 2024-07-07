@@ -6,6 +6,7 @@ import QtQuick.LocalStorage as Sql
 import "qrc:QuizFunctions.js" as QuizLib
 import "qrc:CrossWordFunctions.js" as CWLib
 import QtWebView
+import QtCore
 
 Window {
 
@@ -93,7 +94,6 @@ Window {
     }
   }
 
-
   // Called from c++ event loop
   function onBackPressedTab() {
 
@@ -118,7 +118,7 @@ Window {
       idTabMain.currentIndex = 2
       idSwipeView.currentIndex = 3
       break
-    case 4:
+    default:
       idTabMain.currentIndex = 2
       idSwipeView.currentIndex = 4
       break
@@ -137,6 +137,11 @@ Window {
       var i = MyDownloader.indexFromGlosNr(idGlosModelIndex, nDbNumber)
       idGlosModelIndex.setProperty(i, "state1", sScoreText)
     })
+  }
+
+  Settings {
+    id: idSettings
+    property string imgDir
   }
 
   ListModel {
@@ -224,7 +229,7 @@ Window {
       id: idBtnBack
       visible: idSwipeView.currentIndex === 5
       anchors.right: idBtnHelp.left
-      anchors.rightMargin: 40
+      anchors.rightMargin: 5
       anchors.top: parent.top
       anchors.topMargin: 5
       source: "qrc:back.png"
@@ -236,7 +241,7 @@ Window {
     ButtonQuizImg {
       id: idBtnHelp
       anchors.right: parent.right
-      anchors.rightMargin: 40
+      anchors.rightMargin: 5
       anchors.top: parent.top
       anchors.topMargin: 5
       source: idSwipeView.currentIndex === 5 ? "qrc:quit.png" : "qrc:help.png"
@@ -263,7 +268,7 @@ Window {
     anchors.fill: parent
     anchors.leftMargin: 10
     anchors.rightMargin: 10
-    anchors.bottomMargin: nBtnHeight / 2
+    //  anchors.bottomMargin: nBtnHeight / 2
     anchors.topMargin: idMainTitle.height + 10
     implicitWidth: 200
     contentHeight: idWindow.height / 20
@@ -347,7 +352,6 @@ Window {
     width: idTabMain.width
     interactive: false
 
-
     CreateNewQuiz {
       id: idTab1
     }
@@ -372,13 +376,25 @@ Window {
     WebView {
       id: idWebEngineView
       url: "https://faxling.github.io/WordQuizWin/index.html"
+
+      Rectangle {
+        width: 400
+        height: 400
+        color: "green"
+        BusyIndicator {
+          running: idWebEngineView.loading
+        }
+      }
     }
 
+
+    /*
     Rectangle {
       id: activityTab3
       color: "black"
     }
 
+    */
     onCurrentIndexChanged: {
 
       MyDownloader.pushIndex(nLastIndexMain)

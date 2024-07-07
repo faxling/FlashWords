@@ -111,7 +111,7 @@ Flipable {
         width: parent.width - 150
         placeholderText: "your answer"
         onDisplayTextChanged: {
-          bTextAnswerOk = QuizLib.isAnswerOk(text, answer)
+          bTextAnswerOk = QuizLib.isAnswerOk(displayText, answer)
           if (bTextAnswerOk)
             QuizLib.setAnswerVisible()
         }

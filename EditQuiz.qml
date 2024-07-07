@@ -11,7 +11,16 @@ Item {
 
   Rectangle {
     anchors.fill: parent
-    gradient: "MorningSalad"
+    gradient: Gradient {
+      GradientStop {
+        position: 1.0
+        color: "#93a5cf"
+      }
+      GradientStop {
+        position: 0.0
+        color: "#e4efe9"
+      }
+    }
   }
 
   property int nLastSearch: 0
@@ -430,20 +439,37 @@ Item {
       anchors.rightMargin: 20
     }
 
+    FolderDialog {
+      id: folderDialog
+      currentFolder: StandardPaths.standardLocations(
+                       StandardPaths.DownloadLocation)[0]
+      //    selectedFolder: idSettings.imgDir
+      onSelectedFolderChanged: idSettings.imgDir = selectedFolder
+    }
+
     FileDialog {
       id: fileDialog
-      nameFilters: ["Images (*.png *.jpg *.jpeg)"]
+      nameFilters: ["Images (* *.png *.jpg *.jpeg)"]
       Component.onCompleted: console.log(StandardPaths.standardLocations(
                                            StandardPaths.PicturesLocation))
-      options: FileDialog.DontUseNativeDialog
 
+      //  options: FileDialog.DontUseNativeDialog
+      options: FileDialog.ReadOnly
       onCurrentFileChanged: {
         idEditWordImage.visible = true
         idEditWordImage.source = currentFile
         console.log("file image dialog " + currentFiles)
       }
 
-      currentFolder: "file:///storage/emulated/0/Download"
+      // "file:///storage/emulated/0/Download"
+      currentFolder: idSettings.imgDir
+
+      onCurrentFolderChanged: {
+        idSettings.imgDir = currentFolder
+      }
+      acceptLabel: "Use this Image"
+      rejectLabel: "Cancel"
+
       onAccepted: {
 
         MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text,
@@ -463,10 +489,14 @@ Item {
       onClicked: {
         MyDownloader.requestPerm()
 
+        //  folderDialog.open()
         fileDialog.open()
 
+        /*
         MyImagePicker.pickImage(idTextEdit1.text, sFromLang,
                                 idTextEdit2.text, sToLang)
+
+                                */
       }
     }
 

@@ -49,7 +49,7 @@ Item {
     Row {
       id: idOrdRow
       anchors.horizontalCenter: parent.horizontalCenter
-      spacing: 20
+      spacing: 10
       y: 10
     }
 
@@ -59,7 +59,7 @@ Item {
       anchors.topMargin: 20
       anchors.right: parent.right
       anchors.rightMargin: 20
-      spacing: 20
+      spacing: 10
     }
     Column {
       id: idOrdCol2
@@ -67,7 +67,7 @@ Item {
       anchors.topMargin: 20
       anchors.right: idOrdCol.left
       anchors.rightMargin: 20
-      spacing: 20
+      spacing: 10
     }
     Column {
       id: idOrdCol3
@@ -75,7 +75,7 @@ Item {
       anchors.topMargin: 20
       anchors.right: idOrdCol2.left
       anchors.rightMargin: 20
-      spacing: 20
+      spacing: 10
     }
     ButtonQuiz {
       id: idHangBtn
@@ -174,7 +174,7 @@ Item {
       visible: !idHangBtn.visible
       width: n4BtnWidth / nBtnWidthQuote
       anchors.right: idHangBtn4.left
-      anchors.rightMargin: 20
+      anchors.rightMargin: 10
       anchors.bottom: parent.bottom
       anchors.bottomMargin: 20
       text: idTTrans.visible ? "Tr" : "Translation"
@@ -188,7 +188,7 @@ Item {
       width: n4BtnWidth / nBtnWidthQuote
       visible: !idHangBtn.visible
       anchors.right: idHangBtn3.left
-      anchors.rightMargin: 20
+      anchors.rightMargin: 10
       anchors.bottom: parent.bottom
       anchors.bottomMargin: 20
       text: idTTrans.visible ? "New" : "New Game"

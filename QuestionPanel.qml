@@ -108,6 +108,7 @@ Flipable {
         y: 50
         anchors.horizontalCenter: parent.horizontalCenter
         visible: bTextMode
+
         width: parent.width - 150
         placeholderText: "your answer"
         onDisplayTextChanged: {

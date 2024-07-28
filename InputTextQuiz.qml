@@ -7,6 +7,16 @@ Rectangle
     idTextInput.forceActiveFocus()
   }
 
+  onVisibleChanged: {
+    if (!visible)
+      idMouse.forceActiveFocus()
+  }
+  MouseArea {
+    id:idMouse
+     anchors.fill: parent
+     enabled: false
+     cursorShape: Qt.BlankCursor
+   }
   property alias echoMode : idTextInput.echoMode
   property string placeholderText
   Text
@@ -28,7 +38,7 @@ Rectangle
   TextInput
   {
     id:idTextInput 
-   //  selectByMouse : true
+   //  selectByMouse : true 
     anchors.leftMargin: 5
     font.pixelSize: nBtnHeight / 2.5
     anchors.fill: parent

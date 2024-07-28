@@ -321,11 +321,11 @@ Item {
             idTextEdit1.text = question
             idTextEdit2.text = answer
             idTextEdit3.text = extra
-            idEditWordImage.visible = MyDownloader.hasImage(idTextEdit1.text,
-                                                            sFromLang)
-            idEditWordImage.source = idEditWordImage.visible ? MyDownloader.imageSrc(
+            // idEditWordImage.visible = MyDownloader.hasImage(idTextEdit1.text,
+            //                                                 sLangLang)
+            idEditWordImage.source =  MyDownloader.imageSrc(
                                                                  idTextEdit1.text,
-                                                                 sFromLang) : ""
+                                                                 sLangLang)
             idGlosState.checked = state1 !== 0
             idGlosList.currentIndex = index
           }

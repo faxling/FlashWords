@@ -132,6 +132,12 @@ Rectangle {
 
     Popup {
       id: idInputBox
+      onVisibleChanged: {
+        if (visible)
+          idTextInput.forceActiveFocus()
+        else
+          idCrossWord.forceActiveFocus()
+      }
       property alias t: idTextInput
       property int nIndex
       visible: false
@@ -140,7 +146,9 @@ Rectangle {
         id: idTextInput
         font.pointSize: 20
         font.capitalization: Font.AllUppercase
-        onAccepted: CWLib.handleCharInput(text)
+        onAccepted: {
+          CWLib.handleCharInput(text)
+        }
       }
     }
   }

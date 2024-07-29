@@ -13,11 +13,6 @@ Language learning app. Create a list from a book or any subject. The words can b
   
 Once you created a quiz it can be taken offline.
 
-The created quiz and the downloaded voice files are stored in the Sql LocalStorage
-
-
-
-
 
 
 

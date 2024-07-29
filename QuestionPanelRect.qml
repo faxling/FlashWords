@@ -4,7 +4,7 @@ Rectangle {
   radius: 10
   anchors.fill: parent
   anchors.topMargin: 10
-
+  anchors.bottomMargin: 10
   gradient: "NearMoon"
 
   ButtonQuizImgLarge {

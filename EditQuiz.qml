@@ -283,6 +283,9 @@ Item {
       model: glosModel
       delegate: Row {
         property int nNumber: number
+        property bool bHasImg: MyDownloader.hasImage(question, sFromLang)
+                               || MyDownloader.hasImage(question, sToLang)
+
         id: idRowRow
         spacing: 5
 
@@ -308,6 +311,12 @@ Item {
             idTextInput2.text = answer + " "
             bDoLookUppText1 = false
           }
+          Image {
+            anchors.right: parent.right
+            id: idImageIncludedIndicator
+            source: "qrc:img_small.png"
+            visible: bHasImg
+          }
         }
 
         ButtonQuizImg {
@@ -323,9 +332,8 @@ Item {
             idTextEdit3.text = extra
             // idEditWordImage.visible = MyDownloader.hasImage(idTextEdit1.text,
             //                                                 sLangLang)
-            idEditWordImage.source =  MyDownloader.imageSrc(
-                                                                 idTextEdit1.text,
-                                                                 sLangLang)
+            idEditWordImage.source = MyDownloader.imageSrc(idTextEdit1.text,
+                                                           sLangLang)
             idGlosState.checked = state1 !== 0
             idGlosList.currentIndex = index
           }
@@ -334,14 +342,14 @@ Item {
         ButtonQuizImg {
           height: idAnswer.height
           width: idAnswer.height
-          source: "qrc:horn.png"
+          source: "qrc:horn_small.png"
           onClicked: MyDownloader.playWord(question, sFromLang)
         }
 
         ButtonQuizImg {
           height: idAnswer.height
           width: idAnswer.height
-          source: "qrc:horn.png"
+          source: "qrc:horn_small.png"
           onClicked: MyDownloader.playWord(answer, sToLang)
         }
       }
@@ -450,8 +458,6 @@ Item {
     FileDialog {
       id: fileDialog
       nameFilters: ["Images (* *.png *.jpg *.jpeg)"]
-      Component.onCompleted: console.log(StandardPaths.standardLocations(
-                                           StandardPaths.PicturesLocation))
 
       //  options: FileDialog.DontUseNativeDialog
       options: FileDialog.ReadOnly
@@ -471,10 +477,10 @@ Item {
       rejectLabel: "Cancel"
 
       onAccepted: {
-
         MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text,
                                        sFromLang, idTextEdit2.text,
                                        sToLang, true)
+        idGlosList.currentItem.bHasImg = true
       }
     }
 
@@ -491,6 +497,7 @@ Item {
 
         //  folderDialog.open()
         fileDialog.open()
+
 
         /*
         MyImagePicker.pickImage(idTextEdit1.text, sFromLang,

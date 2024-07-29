@@ -252,6 +252,16 @@ Window {
       //onClicked: Qt.openUrlExternally(
       //              "https://faxling.github.io/WordQuizWin/index.html")
     }
+
+
+    Rectangle {
+      opacity: 0.5
+      // visible: idWebEngineView.loading
+      height: parent.height
+      width: parent.width * ((idWebEngineView.loadProgress === 100 ? 0 : idWebEngineView.loadProgress )/ 100.0)
+      color: "orange"
+    }
+
   }
 
 
@@ -376,25 +386,9 @@ Window {
     WebView {
       id: idWebEngineView
       url: "https://faxling.github.io/WordQuizWin/index.html"
-
-      Rectangle {
-        width: 400
-        height: 400
-        color: "green"
-        BusyIndicator {
-          running: idWebEngineView.loading
-        }
-      }
     }
 
 
-    /*
-    Rectangle {
-      id: activityTab3
-      color: "black"
-    }
-
-    */
     onCurrentIndexChanged: {
 
       MyDownloader.pushIndex(nLastIndexMain)

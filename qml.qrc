@@ -44,6 +44,7 @@
         <file>rm.png</file>
         <file>thumb.png</file>
         <file>thumb_small.png</file>
+        <file>doc/Christmas french.txt</file>
         <file alias="CrossWordFunctions.js">../harbour-wordquiz/qml/CrossWordFunctions.js</file>
         <file alias="QuizFunctions.js">../harbour-wordquiz/qml/QuizFunctions.js</file>
     </qresource>

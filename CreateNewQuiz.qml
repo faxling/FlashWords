@@ -44,14 +44,14 @@ Item {
     InputTextQuiz {
       id: idTextInputQuizName
       cursorVisible: true
-      placeholderText: "quiz name"
+      placeholderText: "Word Set name"
     }
 
     Row {
       id: rowCreateButtons
       spacing: 9
       ButtonQuiz {
-        text: "New Quiz"
+        text: "New Word Set"
         bIsPressedIn: idLangListRow.visible
         onClicked: {
           idLangListRow.visible = !idLangListRow.visible

@@ -221,6 +221,7 @@ Window {
         if (idGlosModelIndex.count === 0)
           return "No Quiz create one or download"
 
+
         return sQuizName + " " + sFromLang + (bIsReverse ? "<-" : "->") + sToLang + " " + sScoreText
       }
     }
@@ -343,7 +344,7 @@ Window {
         }
         onCurrentIndexChanged: idSwipeView.currentIndex = idComboBox.currentIndex + 2
         currentIndex: 0
-        model: ["Quiz", "Hang Man", "Cross Word"]
+        model: ["Flash Cards", "Hang Man", "Cross Word"]
       }
 
       onPressed: {

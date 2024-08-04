@@ -1,13 +1,13 @@
 
 ; NSIS Modern User Interface
-!define VERSION 1.0.0.0
+!define VERSION 1.0.0.1
 
 VIAddVersionKey "ProductName" "FlashWord"
-VIAddVersionKey "Comments" "FlashWord"
+VIAddVersionKey "Comments" "FlashWords"
 VIAddVersionKey "CompanyName" "SoftAx"
 VIAddVersionKey "LegalTrademarks" "Soft Ax"
 VIAddVersionKey "LegalCopyright" "©Soft Ax"
-VIAddVersionKey "FileDescription" "FlashWord"
+VIAddVersionKey "FileDescription" "FlashWords"
 VIAddVersionKey "FileVersion" "${VERSION}"
 VIAddVersionKey "ProductVersion" "${VERSION}"
 VIProductVersion ${VERSION}
@@ -18,14 +18,14 @@ VIAddVersionKey "PrivateBuild" "${VERSION} ${__DATE__} ${__TIME__}"
 ; General
 
   ; Name and output file
-  Name "FlashWord"
-  OutFile "FlashWord_${VERSION}.exe"
+  Name "FlashWords"
+  OutFile "FlashWords_${VERSION}.exe"
 
   ; Default installation folder
-  InstallDir "$LOCALAPPDATA\FlashWord"
+  InstallDir "$LOCALAPPDATA\FlashWords"
   
   ; Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\FlashWord" ""
+  InstallDirRegKey HKCU "Software\FlashWords" ""
 
   ; Request application privileges for Windows Vista/7/8/10
   RequestExecutionLevel user
@@ -51,18 +51,18 @@ VIAddVersionKey "PrivateBuild" "${VERSION} ${__DATE__} ${__TIME__}"
 ; Installer Sections
 
 
-; use tool windeployqt.exe c:\Users\fraxl\Documents\qt\build-FlashWords-Desktop_Qt_6_7_0_MSVC2019_64bit-Release\FlashWords.exe --qmldir c:\Users\fraxl\Documents\qt\FlashWords -dir c:\Qt515\6.7.0\msvc2019_64\Deploy\Bin
+; use tool windeployqt.exe C:/Users/fraxl/Documents/qt/build-FlashWords-Desktop_Qt_6_5_3_MinGW_64_bit-Release/FlashWords.exe --qmldir c:\Users\fraxl\Documents\qt\FlashWords -dir c:\Qt515\6.5.3\Deploy_mingw\bin
 ; to generate install files
 
 Section "WordQuiz" SecDummy
 
   SetOutPath "$INSTDIR"
 
-  File /r c:\Qt515\6.7.0\msvc2019_64\Deploy\Bin
+  File /r c:\Qt515\6.5.3\Deploy_mingw\bin
 
   SetOutPath "$INSTDIR\Bin"
 
-  File c:\Users\fraxl\Documents\qt\build-FlashWords-Desktop_Qt_6_7_0_MSVC2019_64bit-Release\FlashWords.exe
+  File C:\Users\fraxl\Documents\qt\build-FlashWords-Desktop_Qt_6_5_3_MinGW_64_bit-Release\FlashWords.exe
  
  
   CreateShortCut "$SMPROGRAMS\FlashWords.lnk" "$INSTDIR\bin\FlashWords.exe" 

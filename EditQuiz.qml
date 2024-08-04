@@ -464,7 +464,6 @@ Item {
       onCurrentFileChanged: {
         idEditWordImage.visible = true
         idEditWordImage.source = currentFile
-        console.log("file image dialog " + currentFiles)
       }
 
       // "file:///storage/emulated/0/Download"
@@ -476,10 +475,21 @@ Item {
       acceptLabel: "Use this Image"
       rejectLabel: "Cancel"
 
+      onRejected:
+      {
+        idEditWordImage.source = MyDownloader.imageSrc(idTextEdit1.text,
+                                                       sLangLang)
+      }
+
+
+
+
       onAccepted: {
         MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text,
                                        sFromLang, idTextEdit2.text,
                                        sToLang, true)
+        idEditWordImage.source = MyDownloader.imageSrc(idTextEdit1.text,
+                                                       sLangLang)
         idGlosList.currentItem.bHasImg = true
       }
     }
@@ -545,9 +555,13 @@ Item {
         MyDownloader.downloadedImgSignal.connect(idEditDlg.imgDownloaded)
       }
       anchors.fill: parent
-      onDropped: {
+      onDropped:(drop) =>  {
+
         MyDownloader.downloadImage(drop.urls, idTextEdit1.text, sFromLang,
                                    idTextEdit2.text, sToLang, true)
+
+
+
       }
     }
   }

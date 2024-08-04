@@ -40,6 +40,8 @@ Window {
   property string sQuizName: "-"
   property string sQuizDate: "-"
   property string sQuizDesc: "-"
+  property string sImportDesc1 : "-"
+  property string sImportDescDate : "-"
   property string sScoreText: "-"
   property string sWebViewTitle
   property int nDbNumber: 0
@@ -212,8 +214,9 @@ Window {
     TextList {
       id: idTitle
       font.italic: idGlosModelIndex.count === 0
-      y: idBtnHelp.y
+     // y: idBtnHelp.y
       anchors.horizontalCenter: parent.horizontalCenter
+     // verticalAlignment :Text.AlignTop
       text: {
         if (idSwipeView.currentIndex === 5)
           return sWebViewTitle

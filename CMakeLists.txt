@@ -57,6 +57,7 @@ target_link_libraries(FlashWords
     PRIVATE Qt6::Svg
     PRIVATE Qt6::Xml
     PRIVATE Qt6::CorePrivate
+    PRIVATE Qt6::WebView
 )
 
 set_property(TARGET FlashWords APPEND PROPERTY
@@ -86,5 +87,5 @@ if (ANDROID)
 endif()
 
 
-qt_android_generate_deployment_settings(FlashWords)
+#qt_android_generate_deployment_settings(FlashWords)
 qt6_finalize_target(FlashWords)

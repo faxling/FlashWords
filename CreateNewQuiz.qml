@@ -29,13 +29,13 @@ Item {
       x: 5
       spacing: 20
       height: idTextInputQuizName.height
-      TextListLarge {
+      TextList {
         id: idTextSelected
         width: n4BtnWidth
         clip: true
         onClick: idTextInputQuizName.text = text + " "
       }
-      TextListLarge {
+      TextList {
         id: idDescTextOnPage
         text: idWindow.sQuizDesc
       }

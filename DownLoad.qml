@@ -10,7 +10,6 @@ Flipable {
   property string sSelectedQ
   property int nSelectedQ
   property string sImportMsg
-  property string sDesc1
   property string sLang
   property string sDescDate
   property int nError
@@ -109,7 +108,7 @@ Flipable {
       id: idDescText
       anchors.top: idImportTitle.bottom
       x: 20
-      text: sDesc1
+      text: sImportDesc1
     }
 
     WhiteText {
@@ -190,9 +189,10 @@ Flipable {
           anchors.fill: idImportRow
           onClicked: {
             idContainer.sImportMsg = ""
-            idContainer.sDesc1 = desc1
+            sImportDesc1 = desc1
             idContainer.sDescDate = date1
             idContainer.sSelectedQ = qname
+            idContainer.nSelectedQ = number
             idServerListView.currentIndex = index
           }
         }
@@ -260,7 +260,7 @@ Flipable {
           idPwdDialog.visible = false
           idImport.sImportMsg = ""
           MyDownloader.deleteQuiz(idImport.sSelectedQ, idPwdTextInput.text,
-                                  idServerListView.currentIndex)
+                                  idImport.nSelectedQ)
           idImport.bIsDeleting = true
           idPwdTextInput.text = ""
         } else

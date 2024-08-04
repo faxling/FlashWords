@@ -6,7 +6,7 @@
 #include <QDir>
 #include <QFile>
 #include <QGuiApplication>
-#include <QJniObject>
+
 #include <QKeyEvent>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -14,11 +14,15 @@
 #include <QQuickImageProvider>
 #include <QStandardPaths>
 #include <QWindow>
+#include <QtWebView>
+#ifdef Q_OS_ANDROID
+#include <QJniObject>
 #include <QtCore/private/qandroidextras_p.h>
-
+#endif
 // elmal2024
 // "sqlite3.exe .open
 // c:/Users/fraxl/AppData/Local/glosquiz/QML/OfflineStorage/Databases/2db1346274c33ae632adc881bdcd2f8e.sqlite"
+// "c:\Program Files\ImageMagick\magick.exe" convert -density 128x128 -background white icon.svg -define icon:auto-resize icon.ico
 
 class LayoutSaver : public QObject
 {
@@ -121,10 +125,10 @@ public:
 
 int main(int argc, char* argv[])
 {
-
+  QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
   QCoreApplication::setOrganizationName("softax");
   QGuiApplication app(argc, argv);
-
+  QtWebView::initialize();
   Engine engine;
   engine.addImageProvider("theme", new DefImg());
   engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));

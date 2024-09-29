@@ -190,6 +190,7 @@ Flipable {
           onClicked: {
             idContainer.sImportMsg = ""
             sImportDesc1 = desc1
+            sImportDescDate = date1
             idContainer.sDescDate = date1
             idContainer.sSelectedQ = qname
             idContainer.nSelectedQ = number

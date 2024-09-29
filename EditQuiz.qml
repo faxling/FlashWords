@@ -483,7 +483,6 @@ Item {
 
 
 
-
       onAccepted: {
         MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text,
                                        sFromLang, idTextEdit2.text,

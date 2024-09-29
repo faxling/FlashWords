@@ -250,11 +250,11 @@ Window {
       anchors.topMargin: 5
       source: idSwipeView.currentIndex === 5 ? "qrc:quit.png" : "qrc:help.png"
       onClicked: {
+        // Special tool to get html !
         loadInView("Instructions",
-                   "https://faxling.github.io/WordQuizWin/index.html")
+                   "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html")
       }
-      //onClicked: Qt.openUrlExternally(
-      //              "https://faxling.github.io/WordQuizWin/index.html")
+
     }
 
 
@@ -389,7 +389,7 @@ Window {
 
     WebView {
       id: idWebEngineView
-      url: "https://faxling.github.io/WordQuizWin/index.html"
+      url: "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html"
     }
 
 

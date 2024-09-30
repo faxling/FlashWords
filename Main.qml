@@ -257,6 +257,19 @@ Window {
 
     }
 
+    ButtonQuizImg {
+      id: idSerachGoogle
+      anchors.left: parent.left
+      anchors.leftMargin: 5
+      anchors.top: parent.top
+      anchors.topMargin: 5
+      source: "qrc:search.svg"
+      onClicked: {
+        QuizLib.searchClipboard()
+      }
+
+    }
+
 
     Rectangle {
       opacity: 0.5
@@ -362,7 +375,7 @@ Window {
     clip: true
     x: idTabMain.x
     y: idTabMain.y + idTabMain.contentHeight
-    height: idTabMain.height - idTabMain.contentHeight
+    height: idTabMain.height - idTabMain.contentHeight - 10
     width: idTabMain.width
     interactive: false
 

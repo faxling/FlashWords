@@ -3,6 +3,7 @@ import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtCore
+import QtQuick.Layouts
 import "qrc:QuizFunctions.js" as QuizLib
 
 Item {
@@ -110,8 +111,10 @@ Item {
         id: idTextInput
         cursorVisible: true
         onCursorVisibleChanged: {
-          if (cursorVisible)
+          if (cursorVisible) {
+            idWindow.oEditTab = this
             bDoLookUppText1 = true
+          }
         }
         width: idEditQuiz.width / 2 - 15
         placeholderText: "text to translate"
@@ -120,20 +123,26 @@ Item {
       InputTextQuiz {
         id: idTextInput2
         onCursorVisibleChanged: {
-          if (cursorVisible)
+          if (cursorVisible) {
+            idWindow.oEditTab = this
             bDoLookUppText1 = false
+          }
         }
         width: idEditQuiz.width / 2 - 15
         placeholderText: "translation"
       }
     }
 
-    Row {
+    RowLayout {
       id: idDictBtnRow
       spacing: 9
-
+      width: idIextInputToDictRow.width
+      x: idIextInputToDictRow.x
       ButtonQuiz {
+        Layout.minimumHeight: nBtnHeight
+        Layout.fillWidth: true
         id: idBtn1
+
         text: "Find " + sLangLang
         onClicked: {
           QuizLib.reqTranslation(idBtn1, false)
@@ -141,6 +150,8 @@ Item {
       }
 
       ButtonQuiz {
+        Layout.minimumHeight: nBtnHeight
+        Layout.fillWidth: true
         id: idBtn2
         text: "Find " + sLangLangRev
         onClicked: {
@@ -149,14 +160,23 @@ Item {
       }
 
       ButtonQuiz {
-        id: idBtn3
-        text: (bDoLookUppText1 ? sFromLang : sToLang) + " Wiktionary"
+        Layout.minimumHeight: nBtnHeight
+        Layout.fillWidth: true
+        text: (bDoLookUppText1 ? sFromLang : sToLang) + " Wiki"
         onClicked: {
           QuizLib.lookUppInWiki()
         }
       }
-
       ButtonQuiz {
+        text: "Examples"
+        Layout.minimumHeight: nBtnHeight
+        onClicked: {
+          QuizLib.lookUppInReverso()
+        }
+      }
+      ButtonQuiz {
+        Layout.minimumHeight: nBtnHeight
+        Layout.fillWidth: true
         text: "Add"
         onClicked: QuizLib.getTextInputAndAdd()
       }
@@ -475,13 +495,10 @@ Item {
       acceptLabel: "Use this Image"
       rejectLabel: "Cancel"
 
-      onRejected:
-      {
+      onRejected: {
         idEditWordImage.source = MyDownloader.imageSrc(idTextEdit1.text,
                                                        sLangLang)
       }
-
-
 
       onAccepted: {
         MyDownloader.downloadImageSlot(currentFiles, idTextEdit1.text,
@@ -554,14 +571,12 @@ Item {
         MyDownloader.downloadedImgSignal.connect(idEditDlg.imgDownloaded)
       }
       anchors.fill: parent
-      onDropped:(drop) =>  {
+      onDropped: drop => {
 
-        MyDownloader.downloadImage(drop.urls, idTextEdit1.text, sFromLang,
-                                   idTextEdit2.text, sToLang, true)
-
-
-
-      }
+                   MyDownloader.downloadImage(drop.urls, idTextEdit1.text,
+                                              sFromLang, idTextEdit2.text,
+                                              sToLang, true)
+                 }
     }
   }
 

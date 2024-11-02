@@ -49,6 +49,7 @@ Window {
   property int nQuizIndex1_3: 1
   property int nLastQuizIndex1_3: -1
   property int nFontSize: 17
+  property int nFontSizeLarge: 22
   property int nDlgHeight: idWindow.height / 5 + 80
   property int nDlgHeightLarge: idWindow.height / 2.5
   property int nBtnHeight: idWindow.height / 15
@@ -58,6 +59,15 @@ Window {
   property int n25BtnWidth: idTabMain.width / 2.4 - 7
   property int n2BtnWidth: idTabMain.width / 2 - 10
   property int nMainWidth: idTabMain.width
+  property QtObject oEditTab
+
+  TextMetrics {
+    id: t_metrics
+    font.pointSize:  nFontSizeLarge
+    text: "xx-xx"
+  }
+
+  property int nXXxXX : t_metrics.width
 
   // 0 Question 1 Answer
   property int nQuizSortRole: 0
@@ -65,6 +75,7 @@ Window {
   property string sQSort: nQuizSortRole === 0 ? "UPPER(quizword)" : "UPPER(answer)"
   property string sDESCASC: bDESC ? " DESC " : " ASC "
 
+  property string sToClipBoard
   property variant glosListView
   property variant quizListView
   property variant oTakeQuiz
@@ -267,7 +278,6 @@ Window {
       onClicked: {
         QuizLib.searchClipboard()
       }
-
     }
 
 
@@ -298,7 +308,7 @@ Window {
     //  anchors.bottomMargin: nBtnHeight / 2
     anchors.topMargin: idMainTitle.height + 10
     implicitWidth: 200
-    contentHeight: idWindow.height / 20
+    contentHeight: control1.nFontHeight + 10
     background: Item {}
     ButtonTab {
       id: control1

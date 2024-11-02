@@ -7,6 +7,15 @@ TabButton {
 
   property int nFontPixSize : idWindow.width / 25
 
+  property int nFontHeight : t_metrics.height
+
+
+  TextMetrics {
+    id: t_metrics
+    font.pixelSize:  nFontPixSize
+    text: "X"
+  }
+
   background: Rectangle {
     color: control2.checked ?"#626567" :"#BDC3C7"
     opacity: control2.down ? 1 :0.9

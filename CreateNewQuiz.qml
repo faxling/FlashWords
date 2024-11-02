@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
-import QtQuick.LocalStorage  as Sql
+import QtQuick.LocalStorage as Sql
 import "qrc:QuizFunctions.js" as QuizLib
 
 Item {
@@ -166,6 +166,7 @@ Item {
     ListViewHi {
       id: idQuizList
       width: nMainWidth - 20
+
       x: 10
       height: parent.height - idAvailableQuizText.y - 20
       model: glosModelIndex
@@ -191,43 +192,51 @@ Item {
       }
 
       delegate: Item {
-        width: n25BtnWidth + n4BtnWidth * 2 - 5
-        property int nNumber : number
+        width: idQuizListRow.width
+        property int nNumber: number
         height: idCol2.height
-        id: idQuizListRow
+
         Row {
+         id: idQuizListRow
           TextListLarge {
             id: idCol2
-            width: n25BtnWidth
+            width: idQuizList.width - 3 * nXXxXX - 5
             text: quizname
           }
 
           TextListLarge {
             id: idCol3
-            width: n4BtnWidth
+            width: nXXxXX + 5
             text: langpair
             // onClick: idQuizList.currentIndex = index
           }
 
-          TextListLarge {
+          TextList {
             id: idCol4
-            width: n4BtnWidth
+            y:5
+           //  anchors.verticalCenter: idQuizListRow.verticalCenter
+            width: nXXxXX
+           // height:idQuizListRow.height
             text: state1
             //   onClick: idQuizList.currentIndex = index
           }
+        }
 
-          ButtonQuizImg {
-            id: idCol5
-            height: idCol4.height
-            width: idCol4.height
-            source: "qrc:rm.png"
-            onClicked: {
-              idDeleteConfirmationDlg.sQuizToDelete = quizname
-              idDeleteConfirmationDlg.nNumber = number
-              idDeleteConfirmationDlg.visible = true
-            }
+        ButtonQuizImg {
+          id: idCol5
+          anchors.left: idQuizListRow.right
+          anchors.leftMargin: 5
+          height: idCol4.height
+          width: idCol4.height
+          source: "qrc:rm.png"
+          onClicked: {
+            idDeleteConfirmationDlg.sQuizToDelete = quizname
+            idDeleteConfirmationDlg.nNumber = number
+            idDeleteConfirmationDlg.visible = true
           }
         }
+
+
         MouseArea {
           anchors.fill: idQuizListRow
           onClicked: {
@@ -278,7 +287,9 @@ Item {
                         [idDeleteConfirmationDlg.nNumber])
         })
 
-        idGlosModelIndex.remove( MyDownloader.indexFromGlosNr(idGlosModelIndex,idDeleteConfirmationDlg.nNumber))
+        idGlosModelIndex.remove(MyDownloader.indexFromGlosNr(
+                                  idGlosModelIndex,
+                                  idDeleteConfirmationDlg.nNumber))
 
         idDeleteConfirmationDlg.visible = false
       }
@@ -299,11 +310,9 @@ Item {
         idWindow.oPopDlg = undefined
     }
 
-    function closeThisDlg()
-    {
+    function closeThisDlg() {
       visible = false
     }
-
 
     WhiteText {
       id: idExportTitle

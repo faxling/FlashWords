@@ -24,6 +24,34 @@
 // c:/Users/fraxl/AppData/Local/glosquiz/QML/OfflineStorage/Databases/2db1346274c33ae632adc881bdcd2f8e.sqlite"
 // "c:\Program Files\ImageMagick\magick.exe" convert -density 128x128 -background white icon.svg -define icon:auto-resize icon.ico
 
+//c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/arm64-v8a/libcrypto_3.so
+//c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/arm64-v8a/libssl_3.so
+// https://runkit-packages.com/18.x.x/1730241190446/reverso-api/#usage
+// \\\Secure FTP\msstv\var\www\html\glosquiz\revsvr.js
+// curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh
+// sudo bash /tmp/nodesource_setup.sh
+// \\\Secure FTP\msstv\etc\nginx\sites-available\default
+//location /reverso/{
+     //proxy_pass http://127.0.0.1:3000;
+// }
+
+// \etc\systemd\system\reverso-node-app.service
+//
+
+/*
+[Unit]
+    Description=Reverso
+        After=network.target
+          [Service]
+          ExecStart=/usr/bin/node /var/www/html/glosquiz/revsvr.js
+          WorkingDirectory=/var/www/html/glosquiz
+          Restart=always
+          User=stabs
+          Environment=PATH=/usr/bin:/usr/local/bin
+                               Environment=NODE_ENV=production
+        [Install]
+    WantedBy=multi-user.target
+*/
 class LayoutSaver : public QObject
 {
 public:

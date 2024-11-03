@@ -5,7 +5,7 @@ import QtQuick.Controls 2.2
 TabButton {
   id: control2
 
-  property int nFontPixSize : idWindow.width / 25
+  property int nFontPixSize : (idWindow.width + idWindow.height) / 50
 
   property int nFontHeight : t_metrics.height
 

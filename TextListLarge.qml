@@ -5,7 +5,7 @@ Text {
   signal click
   signal pressAndHold
   verticalAlignment: Text.AlignVCenter
-  font.pointSize:nFontSizeLarge
+  font.pixelSize:nFontSizeLarge
  // height:23
   MouseArea{
     anchors.fill: parent

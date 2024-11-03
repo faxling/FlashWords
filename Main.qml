@@ -49,7 +49,7 @@ Window {
   property int nQuizIndex1_3: 1
   property int nLastQuizIndex1_3: -1
   property int nFontSize: 17
-  property int nFontSizeLarge: 22
+  property int nFontSizeLarge: (idWindow.width + idWindow.height) / 80
   property int nDlgHeight: idWindow.height / 5 + 80
   property int nDlgHeightLarge: idWindow.height / 2.5
   property int nBtnHeight: idWindow.height / 15
@@ -63,7 +63,7 @@ Window {
 
   TextMetrics {
     id: t_metrics
-    font.pointSize:  nFontSizeLarge
+    font.pixelSize:  nFontSizeLarge
     text: "xx-xx"
   }
 

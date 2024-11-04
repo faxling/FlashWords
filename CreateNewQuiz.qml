@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.LocalStorage as Sql
 import "qrc:QuizFunctions.js" as QuizLib
+import QtQuick.Layouts
 
 Item {
   property var oFilteredQListModel
@@ -101,8 +102,7 @@ Item {
       function doCurrentIndexChanged() {
         if (idLangList1.currentIndex < 0 || idLangList2.currentIndex < 0)
           return
-        sLangLangSelected = idLangModel.get(
-              idLangList1.currentIndex).code + "-" + idLangModel.get(
+        sLangLangSelected = idLangModel.get(idLangList1.currentIndex).code + "-" + idLangModel.get(
               idLangList2.currentIndex).code
       }
 
@@ -158,7 +158,7 @@ Item {
     TextListLarge {
       id: idAvailableQuizText
       x: idQuizList.x
-      height: nFontSize * 4
+      height: nFontSize
       color: "steelblue"
       text: idGlosModelIndex.count + " Available Quiz's:"
     }
@@ -192,42 +192,46 @@ Item {
       }
 
       delegate: Item {
-        width: idQuizListRow.width
+        width: parent.width
         property int nNumber: number
         height: idCol2.height
 
-        Row {
-         id: idQuizListRow
+        RowLayout {
+          id: idQuizListRow
+          width: parent.width - 2*idCol4.height
           TextListLarge {
+            Layout.fillWidth: true
             id: idCol2
-            width: idQuizList.width - 3 * nXXxXX - 5
+            Layout.horizontalStretchFactor: 6
             text: quizname
           }
 
           TextListLarge {
             id: idCol3
-            width: nXXxXX + 5
+             //Layout.fillWidth: true
+             // Layout.horizontalStretchFactor: 1
+            //  width: nXXxXX * 2
             text: langpair
-            // onClick: idQuizList.currentIndex = index
           }
 
-          TextList {
+          TextListLarge {
             id: idCol4
-            y:5
-           //  anchors.verticalCenter: idQuizListRow.verticalCenter
-            width: nXXxXX
-           // height:idQuizListRow.height
+           //  Layout.horizontalStretchFactor: 1
+           //Layout.fillWidth: true
+            // width: nXXxXX
             text: state1
-            //   onClick: idQuizList.currentIndex = index
           }
+
+
         }
 
         ButtonQuizImg {
           id: idCol5
-          anchors.left: idQuizListRow.right
-          anchors.leftMargin: 5
+
+           anchors.right: parent.right
+          //  anchors.leftMargin: 5
           height: idCol4.height
-          width: idCol4.height
+         //  width: idCol4.height
           source: "qrc:rm.png"
           onClicked: {
             idDeleteConfirmationDlg.sQuizToDelete = quizname
@@ -235,8 +239,6 @@ Item {
             idDeleteConfirmationDlg.visible = true
           }
         }
-
-
         MouseArea {
           anchors.fill: idQuizListRow
           onClicked: {
@@ -280,16 +282,12 @@ Item {
       anchors.rightMargin: 10
       onClicked: {
         db.transaction(function (tx) {
-          tx.executeSql('DELETE FROM GlosaDbIndex WHERE dbnumber = ?',
-                        [idDeleteConfirmationDlg.nNumber])
+          tx.executeSql('DELETE FROM GlosaDbIndex WHERE dbnumber = ?', [idDeleteConfirmationDlg.nNumber])
           tx.executeSql('DROP TABLE Glosa' + idDeleteConfirmationDlg.nNumber)
-          tx.executeSql('DELETE FROM GlosaDbDesc WHERE dbnumber = ?',
-                        [idDeleteConfirmationDlg.nNumber])
+          tx.executeSql('DELETE FROM GlosaDbDesc WHERE dbnumber = ?', [idDeleteConfirmationDlg.nNumber])
         })
 
-        idGlosModelIndex.remove(MyDownloader.indexFromGlosNr(
-                                  idGlosModelIndex,
-                                  idDeleteConfirmationDlg.nNumber))
+        idGlosModelIndex.remove(MyDownloader.indexFromGlosNr(idGlosModelIndex, idDeleteConfirmationDlg.nNumber))
 
         idDeleteConfirmationDlg.visible = false
       }
@@ -370,10 +368,8 @@ Item {
       onClicked: {
         bProgVisible = true
         QuizLib.updateDesc1(idTextInputQuizDesc.displayText)
-        MyDownloader.updateCurrentQuiz(glosModel, sQuizName, sLangLang,
-                                       idTextInputQuizPwd.displayText,
-                                       idTextInputQuizDesc.displayText,
-                                       idProgressUpload)
+        MyDownloader.updateCurrentQuiz(glosModel, sQuizName, sLangLang, idTextInputQuizPwd.displayText,
+                                       idTextInputQuizDesc.displayText, idProgressUpload)
       }
     }
 
@@ -386,10 +382,8 @@ Item {
       anchors.rightMargin: 10
       onClicked: {
         QuizLib.updateDesc1(idTextInputQuizDesc.displayText)
-        MyDownloader.exportCurrentQuiz(glosModel, sQuizName, sLangLang,
-                                       idTextInputQuizPwd.displayText,
-                                       idTextInputQuizDesc.displayText,
-                                       idProgressUpload)
+        MyDownloader.exportCurrentQuiz(glosModel, sQuizName, sLangLang, idTextInputQuizPwd.displayText,
+                                       idTextInputQuizDesc.displayText, idProgressUpload)
         bProgVisible = true
       }
     }

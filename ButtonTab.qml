@@ -5,14 +5,12 @@ import QtQuick.Controls 2.2
 TabButton {
   id: control2
 
-  property int nFontPixSize : (idWindow.width + idWindow.height) / 50
-
   property int nFontHeight : t_metrics.height
 
 
   TextMetrics {
     id: t_metrics
-    font.pixelSize:  nFontPixSize
+    font.pixelSize:  nFontSizeLarge
     text: "X"
   }
 
@@ -22,7 +20,7 @@ TabButton {
   }
   contentItem: Text {
     text: control2.text
-    font.pixelSize:  nFontPixSize
+    font.pixelSize:  nFontSizeLarge
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     color: control2.checked ? "white" : "black"

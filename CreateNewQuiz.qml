@@ -198,7 +198,7 @@ Item {
 
         RowLayout {
           id: idQuizListRow
-          width: parent.width - 2*idCol4.height
+          width: parent.width - 2 * nFontSizeLarge
           TextListLarge {
             Layout.fillWidth: true
             id: idCol2
@@ -208,30 +208,31 @@ Item {
 
           TextListLarge {
             id: idCol3
-             //Layout.fillWidth: true
-             // Layout.horizontalStretchFactor: 1
+            Layout.fillWidth: false
+            Layout.preferredWidth: nXXxXX
+
+            // Layout.horizontalStretchFactor: 1
             //  width: nXXxXX * 2
             text: langpair
           }
 
           TextListLarge {
             id: idCol4
-           //  Layout.horizontalStretchFactor: 1
-           //Layout.fillWidth: true
+            Layout.preferredWidth: nXXxXX*1.5
+            //  Layout.horizontalStretchFactor: 1
+           // Layout.fillWidth: true
             // width: nXXxXX
             text: state1
           }
-
-
         }
 
         ButtonQuizImg {
           id: idCol5
 
-           anchors.right: parent.right
+          anchors.right: parent.right
           //  anchors.leftMargin: 5
           height: idCol4.height
-         //  width: idCol4.height
+          //  width: idCol4.height
           source: "qrc:rm.png"
           onClicked: {
             idDeleteConfirmationDlg.sQuizToDelete = quizname

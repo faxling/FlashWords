@@ -1,6 +1,6 @@
 
 ; NSIS Modern User Interface
-!define VERSION 1.0.0.1
+!define VERSION 1.0.0.2
 
 VIAddVersionKey "ProductName" "FlashWord"
 VIAddVersionKey "Comments" "FlashWords"

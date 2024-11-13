@@ -337,7 +337,7 @@ Window {
           contentItem: Text {
             text: modelData
             // color: "#21be2b"
-            font.pixelSize: control3.nFontPixSize
+            font.pixelSize: nFontSizeLarge
             verticalAlignment: Text.AlignVCenter
           }
 

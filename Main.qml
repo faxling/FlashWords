@@ -40,8 +40,8 @@ Window {
   property string sQuizName: "-"
   property string sQuizDate: "-"
   property string sQuizDesc: "-"
-  property string sImportDesc1 : "-"
-  property string sImportDescDate : "-"
+  property string sImportDesc1: "-"
+  property string sImportDescDate: "-"
   property string sScoreText: "-"
   property string sWebViewTitle
   property int nDbNumber: 0
@@ -63,11 +63,11 @@ Window {
 
   TextMetrics {
     id: t_metrics
-    font.pixelSize:  nFontSizeLarge
+    font.pixelSize: nFontSizeLarge
     text: "xx-xx"
   }
 
-  property int nXXxXX : t_metrics.width
+  property int nXXxXX: t_metrics.width
 
   // 0 Question 1 Answer
   property int nQuizSortRole: 0
@@ -145,8 +145,7 @@ Window {
   onSScoreTextChanged: {
 
     db.transaction(function (tx) {
-      tx.executeSql('UPDATE GlosaDbIndex SET state1=? WHERE dbnumber=?',
-                    [sScoreText, nDbNumber])
+      tx.executeSql('UPDATE GlosaDbIndex SET state1=? WHERE dbnumber=?', [sScoreText, nDbNumber])
       var i = MyDownloader.indexFromGlosNr(idGlosModelIndex, nDbNumber)
       idGlosModelIndex.setProperty(i, "state1", sScoreText)
     })
@@ -225,16 +224,15 @@ Window {
     TextList {
       id: idTitle
       font.italic: idGlosModelIndex.count === 0
-     // y: idBtnHelp.y
+      // y: idBtnHelp.y
       anchors.horizontalCenter: parent.horizontalCenter
-     // verticalAlignment :Text.AlignTop
+      // verticalAlignment :Text.AlignTop
       text: {
         if (idSwipeView.currentIndex === 5)
           return sWebViewTitle
 
         if (idGlosModelIndex.count === 0)
           return "No Quiz create one or download"
-
 
         return sQuizName + " " + sFromLang + (bIsReverse ? "<-" : "->") + sToLang + " " + sScoreText
       }
@@ -265,7 +263,6 @@ Window {
         loadInView("Instructions",
                    "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html")
       }
-
     }
 
     ButtonQuizImg {
@@ -280,15 +277,13 @@ Window {
       }
     }
 
-
     Rectangle {
       opacity: 0.5
       // visible: idWebEngineView.loading
       height: parent.height
-      width: parent.width * ((idWebEngineView.loadProgress === 100 ? 0 : idWebEngineView.loadProgress )/ 100.0)
+      width: parent.width * ((idWebEngineView.loadProgress === 100 ? 0 : idWebEngineView.loadProgress) / 100.0)
       color: "orange"
     }
-
   }
 
 
@@ -343,11 +338,14 @@ Window {
 
           highlighted: idComboBox.highlightedIndex === index
         }
+
         background: Item {}
+
+        // The displayed selected item from the droplist
         contentItem: Item {
           Text {
             text: control3.text
-            font.pixelSize: control3.nFontPixSize
+            font.pixelSize: nFontSizeLarge
             anchors.fill: parent
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -415,7 +413,6 @@ Window {
       url: "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html"
     }
 
-
     onCurrentIndexChanged: {
 
       MyDownloader.pushIndex(nLastIndexMain)
@@ -430,8 +427,7 @@ Window {
 
         // Highlight the word currenly displayed on Quiz pane
         glosListView.currentIndex = idWindow.nGlosaTakeQuizIndex
-        glosListView.positionViewAtIndex(idWindow.nGlosaTakeQuizIndex,
-                                         ListView.Center)
+        glosListView.positionViewAtIndex(idWindow.nGlosaTakeQuizIndex, ListView.Center)
       }
 
       nLastIndexMain = currentIndex

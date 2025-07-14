@@ -87,6 +87,30 @@ Flipable {
         source: "qrc:img.png"
         onClicked: bImageMode = !bImageMode
       }
+      ButtonQuizImg {
+        id: idCarBtn
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.top: idImgBtn.bottom
+        anchors.topMargin: 20
+        bIsPushed: bCarMode
+        source: "qrc:car.svg"
+        onClicked:
+        {
+          bCarMode = !bCarMode
+          if (bCarMode)
+          {
+            QuizLib.playQuestion()
+            idCarTimer.start()
+          }
+          else
+          {
+            idCarTimerPlayAnswer.stop()
+            idCarTimerPlayQuestion.stop()
+            idCarTimer.stop()
+          }
+        }
+      }
 
       Text {
         id: idTextExtra

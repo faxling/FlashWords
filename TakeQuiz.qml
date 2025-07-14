@@ -8,6 +8,7 @@ Item {
   property bool bExtraInfoVisible: false
   property bool bTextMode: false
   property bool bImageMode: false
+  property bool bCarMode: false
   property bool bVoiceMode: false
   property bool bTextAnswerOk: false
 
@@ -21,6 +22,28 @@ Item {
     repeat: false
     onTriggered: idTakeQuizView.movementEnded()
   }
+
+  Timer {
+    id: idCarTimer
+    interval: 10000
+    repeat: true
+    onTriggered: QuizLib.exeCarMode()
+  }
+
+  Timer {
+    id: idCarTimerPlayQuestion
+    interval: 1000
+    repeat: false
+    onTriggered: QuizLib.playQuestion()
+  }
+
+  Timer {
+    id: idCarTimerPlayAnswer
+    interval: 8000
+    repeat: false
+    onTriggered: QuizLib.playAnswer()
+  }
+
   Keys.onLeftPressed: {
     // bMoving = true
     idTakeQuizView.incIndex()
@@ -39,8 +62,7 @@ Item {
     if (idQuizModel.get(nQuizIndex1_3).answerVisible)
       MyDownloader.playWord(idQuizModel.get(nQuizIndex1_3).answer, sAnswerLang)
     else
-      MyDownloader.playWord(idQuizModel.get(nQuizIndex1_3).question,
-                            sQuestionLang)
+      MyDownloader.playWord(idQuizModel.get(nQuizIndex1_3).question, sQuestionLang)
   }
 
   Keys.onDownPressed: {
@@ -55,7 +77,7 @@ Item {
     width: idRectTakeQuiz.width
     height: idRectTakeQuiz.height
 
-    property int nLastIndex: 1
+    property int nLastIndex: 0
 
     function incIndex() {
       idMoveTimer.start()
@@ -65,6 +87,8 @@ Item {
     function decIndex() {
       idMoveTimer.start()
       idTakeQuizView.decrementCurrentIndex()
+      idCarTimerPlayQuestion.stop()
+      idCarTimerPlayAnswer.stop()
     }
 
     // interactive: ((glosModelWorking.count > 0 ) && (bTextAnswerOk || !bTextMode))

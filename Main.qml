@@ -25,7 +25,7 @@ Window {
   property string sReqUrlEn
 
   property variant oHang
-  property variant db
+  property var db
   property string sLangLangSelected
   property string sLangLang
   property string sLangLangRev

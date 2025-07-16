@@ -52,6 +52,23 @@
         [Install]
     WantedBy=multi-user.target
 */
+/*
+
+
+this was needed before upgrading gradle
+
+ c:/Qt515/6.9.1/android_arm64_v8a/plugins/sqldrivers/libplugins_sqldrivers_qsqlite_arm64-v8a.so)
+
+    set_property(TARGET FlashWords PROPERTY QT_ANDROID_EXTRA_LIBS
+        ${CMAKE_PREFIX_PATH}/plugins/sqldrivers/libplugins_sqldrivers_qsqlite_arm64-v8a.so)
+
+          c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/${CMAKE_ANDROID_ARCH_ABI}/libcrypto_3.so
+          c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/${CMAKE_ANDROID_ARCH_ABI}/libssl_3.so)
+
+ * /
+
+
+
 class LayoutSaver : public QObject
 {
 public:

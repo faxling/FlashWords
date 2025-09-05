@@ -6,7 +6,7 @@
 #include <QDir>
 #include <QFile>
 #include <QGuiApplication>
-
+#include <QSqlDatabase>
 #include <QKeyEvent>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -22,17 +22,18 @@
 // elmal2024
 // "sqlite3.exe .open
 // c:/Users/fraxl/AppData/Local/glosquiz/QML/OfflineStorage/Databases/2db1346274c33ae632adc881bdcd2f8e.sqlite"
-// "c:\Program Files\ImageMagick\magick.exe" convert -density 128x128 -background white icon.svg -define icon:auto-resize icon.ico
+// "c:\Program Files\ImageMagick\magick.exe" convert -density 128x128 -background white icon.svg
+// -define icon:auto-resize icon.ico
 
-//c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/arm64-v8a/libcrypto_3.so
-//c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/arm64-v8a/libssl_3.so
+// c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/arm64-v8a/libcrypto_3.so
+// c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/arm64-v8a/libssl_3.so
 // https://runkit-packages.com/18.x.x/1730241190446/reverso-api/#usage
 // \\\Secure FTP\msstv\var\www\html\glosquiz\revsvr.js
 // curl -sL https://deb.nodesource.com/setup_18.x -o /tmp/nodesource_setup.sh
 // sudo bash /tmp/nodesource_setup.sh
 // \\\Secure FTP\msstv\etc\nginx\sites-available\default
-//location /reverso/{
-     //proxy_pass http://127.0.0.1:3000;
+// location /reverso/{
+// proxy_pass http://127.0.0.1:3000;
 // }
 
 // \etc\systemd\system\reverso-node-app.service
@@ -52,7 +53,13 @@
         [Install]
     WantedBy=multi-user.target
 */
+
 /*
+
+
+ make screen recording
+
+ffmpeg -f gdigrab -framerate 30 -offset_x 10 -offset_y 20 -video_size 640x480 -show_region 1 -i desktop output.mp4
 
 
 this was needed before upgrading gradle
@@ -65,9 +72,7 @@ this was needed before upgrading gradle
           c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/${CMAKE_ANDROID_ARCH_ABI}/libcrypto_3.so
           c:/Users/fraxl/AppData/Local/Android/Sdk/android_openssl/ssl_3/${CMAKE_ANDROID_ARCH_ABI}/libssl_3.so)
 
- * /
-
-
+ */
 
 class LayoutSaver : public QObject
 {
@@ -115,7 +120,7 @@ class Engine : public QQmlApplicationEngine
 public:
   Engine()
   {
-    qmlRegisterType<SvgDrawing>("SvgDrawing", 1, 0, "SvgDrawing");
+    qmlRegisterType<SvgDrawing>("Flashwords.Svgdrawing", 1, 1, "SvgDrawing");
 
     m_p = new Speechdownloader(offlineStoragePath(), nullptr);
     rootContext()->setContextProperty("MyDownloader", m_p);
@@ -175,19 +180,23 @@ int main(int argc, char* argv[])
   QGuiApplication app(argc, argv);
   QtWebView::initialize();
   Engine engine;
+  qDebug() << "Qt database drivers " << QSqlDatabase::drivers();
   engine.addImageProvider("theme", new DefImg());
   engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
 
   // app.QGuiApplication::topLevelWindows().first();
   auto o = QGuiApplication::topLevelWindows();
-  LayoutSaver oLS(o.first(), engine.offlineStoragePath());
-  QObject::connect(&app, &QGuiApplication::aboutToQuit, &oLS, &LayoutSaver::aboutToQuit);
+  if (o.empty() == false)
+  {
+    LayoutSaver oLS(o.first(), engine.offlineStoragePath());
+    QObject::connect(&app, &QGuiApplication::aboutToQuit, &oLS, &LayoutSaver::aboutToQuit);
 
+    oLS.LoadLast();
+  }
   qDebug() << "start wordquiz";
 
   app.setWindowIcon(QIcon("qrc:horn.png"));
 
-  oLS.LoadLast();
 
 #ifdef Q_OS_ANDROID
 

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import "qrc:QuizFunctions.js" as QuizLib
 import QtQuick.Window
-import SvgDrawing 1.0
+import Flashwords.Svgdrawing
 
 Item {
   id: idHangMan

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 set(QT_ANDROID_TARGET_SDK_VERSION 35)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Multimedia Svg Xml WebView)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Multimedia Svg Xml Qml Sql WebView)
 
 qt_standard_project_setup()
 
@@ -46,6 +46,7 @@ set_target_properties(FlashWords PROPERTIES
 
 
 target_link_libraries(FlashWords
+    PRIVATE Qt6::Sql
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Core
     PRIVATE Qt6::Multimedia
@@ -53,6 +54,7 @@ target_link_libraries(FlashWords
     PRIVATE Qt6::Xml
     PRIVATE Qt6::CorePrivate
     PRIVATE Qt6::WebView
+    PRIVATE Qt6::Qml
 )
 
 set_property(TARGET FlashWords APPEND PROPERTY

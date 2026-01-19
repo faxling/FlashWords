@@ -1,12 +1,11 @@
-cmake_minimum_required(VERSION 3.20)
-
+﻿cmake_minimum_required(VERSION 3.20)
 
 project(FlashWords VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
-set(QT_ANDROID_TARGET_SDK_VERSION 35)
+set(QT_ANDROID_TARGET_SDK_VERSION 36)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Multimedia Svg Xml Qml Sql WebView)
+find_package(Qt6 REQUIRED COMPONENTS Core CorePrivate Quick Multimedia Svg Xml Qml Sql WebView)
 
 qt_standard_project_setup()
 
@@ -14,6 +13,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     enable_language("RC")
     set (WIN32_RESOURCES Resource.rc)
 endif()
+
+set(HEADERS
+    ../harbour-wordquiz/src/crosswordq.h
+    ../harbour-wordquiz/src/Filehelpers.h
+    ../harbour-wordquiz/src/speechdownloader.h
+    ../harbour-wordquiz/src/svgdrawing.h)
 
 qt_add_executable(FlashWords
     main.cpp
@@ -23,8 +28,10 @@ qt_add_executable(FlashWords
     ../harbour-wordquiz/src/svgdrawing.cpp
     ../Crossword/crossword.cpp
     qml.qrc
+    ${HEADERS}
     ${WIN32_RESOURCES}
 )
+
 
 
 qt_add_qml_module(
@@ -49,10 +56,10 @@ target_link_libraries(FlashWords
     PRIVATE Qt6::Sql
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Core
+    PRIVATE Qt6::CorePrivate
     PRIVATE Qt6::Multimedia
     PRIVATE Qt6::Svg
     PRIVATE Qt6::Xml
-    PRIVATE Qt6::CorePrivate
     PRIVATE Qt6::WebView
     PRIVATE Qt6::Qml
 )
@@ -61,6 +68,20 @@ set_property(TARGET FlashWords APPEND PROPERTY
     QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
 )
 
+if (ANDROID)
+    include(FetchContent)
+    FetchContent_Declare(
+        android_openssl
+        DOWNLOAD_EXTRACT_TIMESTAMP true
+        URL https://github.com/KDAB/android_openssl/archive/refs/heads/master.zip
+    )
+    FetchContent_MakeAvailable(android_openssl)
+    include(${android_openssl_SOURCE_DIR}/android_openssl.cmake)
+endif()
+
+if (ANDROID)
+    add_android_openssl_libraries(FlashWords)
+endif()
 
 
 
@@ -86,4 +107,5 @@ endif()
 
 
 #qt_android_generate_deployment_settings(FlashWords)
+
 

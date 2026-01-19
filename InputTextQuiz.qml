@@ -1,7 +1,6 @@
-import QtQuick
+﻿import QtQuick
 
-Rectangle
-{
+Rectangle {
   property int nButtonFontSize: idWindow.width / 30
   function forceActiveFocus()
   {
@@ -20,26 +19,24 @@ Rectangle
    }
   property alias echoMode : idTextInput.echoMode
   property string placeholderText
-  Text
-  {
+  Text {
     opacity: 0.5
     x: 5
     font.italic: true
-    visible : displayText.length === 0 && !idTextInput.activeFocus
+    visible: displayText.length === 0 && !idTextInput.activeFocus
     font.pixelSize: nButtonFontSize
-    text : placeholderText
+    text: placeholderText
   }
-  property alias cursorVisible : idTextInput.cursorVisible
-  property alias displayText : idTextInput.displayText
-  property alias text : idTextInput.text
-  color:"grey"
-  width: parent.width -10
-  x:5
-  height:   nButtonFontSize + 5
-  TextInput
-  {
-    id:idTextInput 
-   //  selectByMouse : true 
+  property alias cursorVisible: idTextInput.cursorVisible
+  property alias displayText: idTextInput.displayText
+  property alias text: idTextInput.text
+  color: "grey"
+  width: parent.width - 10
+  x: 5
+  height: nButtonFontSize + 5
+  TextInput {
+    id: idTextInput
+    //  selectByMouse : true
     anchors.leftMargin: 5
     font.pixelSize: nButtonFontSize
     anchors.fill: parent

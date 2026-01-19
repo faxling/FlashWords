@@ -1,4 +1,4 @@
-import QtQuick
+﻿import QtQuick
 // import QtQuick.Controls
 import QtQuick.Controls.Basic
 
@@ -37,15 +37,5 @@ Button {
 
   font.pixelSize: nButtonFontSize
   text: control.text
-/*
-  contentItem: Text {
-    id: idTextLabel
-    renderType: Text.NativeRendering
-    verticalAlignment: Text.AlignVCenter
-    horizontalAlignment: Text.AlignHCenter
-    font.pointSize: nButtonFontSize
-    text: control.text
 
-  }
-  */
 }

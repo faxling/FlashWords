@@ -9,7 +9,7 @@ import QtWebView
 import QtCore
 
 Window {
-
+  
   id: idWindow
   property int nLastIndexMain
   // init in initUrls
@@ -19,11 +19,11 @@ Window {
   property string sReqDictUrlEn
   property string sReqUrlBase
   property string sDEFAULT_IMG
-
+  
   property string sReqUrl
   property string sReqUrlRev
   property string sReqUrlEn
-
+  
   property variant oHang
   property var db
   property string sLangLangSelected
@@ -60,21 +60,21 @@ Window {
   property int n2BtnWidth: idTabMain.width / 2 - 10
   property int nMainWidth: idTabMain.width
   property QtObject oEditTab
-
+  
   TextMetrics {
     id: t_metrics
     font.pixelSize: nFontSizeLarge
     text: "xx-xx"
   }
-
+  
   property int nXXxXX: t_metrics.width
-
+  
   // 0 Question 1 Answer
   property int nQuizSortRole: 0
   property bool bDESC: true
   property string sQSort: nQuizSortRole === 0 ? "UPPER(quizword)" : "UPPER(answer)"
   property string sDESCASC: bDESC ? " DESC " : " ASC "
-
+  
   property string sToClipBoard
   property variant glosListView
   property variant quizListView
@@ -83,7 +83,7 @@ Window {
   property bool bAllok: false
   property bool bDownloadNotVisible: true
   property bool bCWBusy: false
-
+  
   property var glosModelIndex
   // property int nGlosaDbLastIndex:  -1
   //  color: "#E5E7E9"
@@ -94,7 +94,7 @@ Window {
     source: "qrc:ITCKRIST.TTF"
   }
   property int nLastIndex
-
+  
   function loadInView(sTitle, sUrl) {
     idWebEngineView.url = sUrl
     sWebViewTitle = sTitle
@@ -106,14 +106,14 @@ Window {
       idSwipeView.currentIndex = nLastIndex
     }
   }
-
+  
   // Called from c++ event loop
   function onBackPressedTab() {
-
+    
     var n = MyDownloader.popIndex()
     if (n < 0)
       return
-
+    
     switch (n) {
     case 0:
       idTabMain.currentIndex = 0
@@ -137,50 +137,50 @@ Window {
       break
     }
   }
-
+  
   function onBackPressedDlg() {
     idWindow.oPopDlg.closeThisDlg()
   }
-
+  
   onSScoreTextChanged: {
-
+    
     db.transaction(function (tx) {
       tx.executeSql('UPDATE GlosaDbIndex SET state1=? WHERE dbnumber=?', [sScoreText, nDbNumber])
       var i = MyDownloader.indexFromGlosNr(idGlosModelIndex, nDbNumber)
       idGlosModelIndex.setProperty(i, "state1", sScoreText)
     })
   }
-
+  
   Settings {
     id: idSettings
     property string imgDir
   }
-
+  
   ListModel {
     id: glosModel
   }
-
+  
   ListModel {
     id: glosModelWorkingRev
   }
-
+  
   ListModel {
     id: glosModelWorking
   }
-
+  
   ListModel {
     id: idGlosModelIndex
   }
-
+  
   ListModel {
     id: idLangModel
   }
-
+  
   // Used by idTakeQuizView in TakeQuiz
   ListModel {
     id: idQuizModel
     property int bDir
-
+    
     ListElement {
       number: 0
       numberDb: 0
@@ -212,7 +212,7 @@ Window {
       allOk1_3: false
     }
   }
-
+  
   width: 570
   height: 730
   visible: true
@@ -230,14 +230,14 @@ Window {
       text: {
         if (idSwipeView.currentIndex === 5)
           return sWebViewTitle
-
+        
         if (idGlosModelIndex.count === 0)
           return "No Quiz create one or download"
-
+        
         return sQuizName + " " + sFromLang + (bIsReverse ? "<-" : "->") + sToLang + " " + sScoreText
       }
     }
-
+    
     ButtonQuizImg {
       id: idBtnBack
       visible: idSwipeView.currentIndex === 5
@@ -250,7 +250,7 @@ Window {
         idWebEngineView.goBack()
       }
     }
-
+    
     ButtonQuizImg {
       id: idBtnHelp
       anchors.right: parent.right
@@ -264,7 +264,7 @@ Window {
                    "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html")
       }
     }
-
+    
     ButtonQuizImg {
       id: idSerachGoogle
       anchors.left: parent.left
@@ -276,7 +276,7 @@ Window {
         QuizLib.searchClipboard()
       }
     }
-
+    
     Rectangle {
       opacity: 0.5
       // visible: idWebEngineView.loading
@@ -285,8 +285,8 @@ Window {
       color: "orange"
     }
   }
-
-
+  
+  
   /*
   TextList
   {
@@ -370,14 +370,14 @@ Window {
         currentIndex: 0
         model: ["Flash Cards", "Hang Man", "Cross Word"]
       }
-
+      
       onPressed: {
         // checked = true
         idSwipeView.currentIndex = idComboBox.currentIndex + 2
       }
     }
   }
-
+  
   SwipeView {
     id: idSwipeView
     clip: true
@@ -386,7 +386,7 @@ Window {
     height: idTabMain.height - idTabMain.contentHeight - 10
     width: idTabMain.width
     interactive: false
-
+    
     CreateNewQuiz {
       id: idTab1
     }
@@ -403,20 +403,20 @@ Window {
         oHang = idTab4
       }
     }
-
+    
     CrossWord {
       id: idTab5
     }
-
+    
     WebView {
       id: idWebEngineView
       url: "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html"
     }
-
+    
     onCurrentIndexChanged: {
-
+      
       MyDownloader.pushIndex(nLastIndexMain)
-
+      
       if (currentIndex === 3)
         oHang.newQ()
       else if (currentIndex === 2)
@@ -424,12 +424,12 @@ Window {
       else if (currentIndex === 4)
         idTab5.loadCW()
       else if (currentIndex === 1) {
-
+        
         // Highlight the word currenly displayed on Quiz pane
         glosListView.currentIndex = idWindow.nGlosaTakeQuizIndex
         glosListView.positionViewAtIndex(idWindow.nGlosaTakeQuizIndex, ListView.Center)
       }
-
+      
       nLastIndexMain = currentIndex
     }
   }

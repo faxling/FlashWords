@@ -1,14 +1,12 @@
-import QtQuick
+﻿import QtQuick
 
 Text {
-  id:idText
+  id: idText
   signal click
-  font.pointSize : nFontSize
+  font.pointSize: nFontSize
   color: "white"
-  MouseArea{
+  MouseArea {
     anchors.fill: parent
     onClicked: idText.click()
   }
 }
-
-

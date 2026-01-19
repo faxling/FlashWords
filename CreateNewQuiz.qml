@@ -1,4 +1,4 @@
-import QtQuick
+﻿import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtQuick.LocalStorage as Sql
@@ -20,8 +20,8 @@ Item {
     anchors.fill: parent
 
     TextList {
-      x: idDescText.x
       id: idDateDesc1
+      x: idDescText.x
       text: idWindow.sQuizDate
     }
 
@@ -55,32 +55,31 @@ Item {
         text: "New Word Set"
         bIsPressedIn: idLangListRow.visible
         onClicked: {
-          idLangListRow.visible = !idLangListRow.visible
+          idLangListRow.visible = !idLangListRow.visible;
         }
       }
       ButtonQuiz {
         text: "Rename"
         onClicked: {
-          QuizLib.renameQuiz(idTextInputQuizName.displayText)
+          QuizLib.renameQuiz(idTextInputQuizName.displayText);
         }
       }
       ButtonQuiz {
         id: btnUppload
         text: "Uppload"
         onClicked: {
-          idExport.visible = true
-          idTextInputQuizDesc.text = idWindow.sQuizDesc
-          idExportError.visible = false
+          idExport.visible = true;
+          idTextInputQuizDesc.text = idWindow.sQuizDesc;
+          idExportError.visible = false;
         }
       }
       ButtonQuiz {
         id: idDownloadBtn
         text: "Download"
         onClicked: {
-          idImport.showPane()
+          idImport.showPane();
         }
       }
-
 
       /*
       TextList
@@ -95,21 +94,19 @@ Item {
       id: idLangListRow
       visible: false
       anchors.horizontalCenter: parent.horizontalCenter
-      //  width:parent.width
       height: nDlgHeight / 2
 
       spacing: 20
       function doCurrentIndexChanged() {
         if (idLangList1.currentIndex < 0 || idLangList2.currentIndex < 0)
-          return
-        sLangLangSelected = idLangModel.get(idLangList1.currentIndex).code + "-" + idLangModel.get(
-              idLangList2.currentIndex).code
+          return;
+        sLangLangSelected = idLangModel.get(idLangList1.currentIndex).code + "-" + idLangModel.get(idLangList2.currentIndex).code;
       }
 
       ListViewHi {
         id: idLangList1
         onCurrentIndexChanged: {
-          idLangListRow.doCurrentIndexChanged()
+          idLangListRow.doCurrentIndexChanged();
         }
 
         width: n4BtnWidth
@@ -142,7 +139,7 @@ Item {
         height: parent.height + 2
         model: idLangModel
         onCurrentIndexChanged: {
-          idLangListRow.doCurrentIndexChanged()
+          idLangListRow.doCurrentIndexChanged();
         }
 
         delegate: TextListLarge {
@@ -173,14 +170,13 @@ Item {
       spacing: 3
 
       Component.onCompleted: {
-        QuizLib.connectMyDownloader()
-        QuizLib.initLangList()
-        QuizLib.getAndInitDb()
+        QuizLib.connectMyDownloader();
+        QuizLib.initLangList();
+        QuizLib.getAndInitDb();
       }
 
       onCurrentItemChanged: {
-        QuizLib.loadFromQuizList()
-
+        QuizLib.loadFromQuizList();
 
         /*
         if (nGlosaDbLastIndex >= 0)
@@ -192,7 +188,7 @@ Item {
       }
 
       delegate: Item {
-        width: parent.width
+        width: idQuizList.width
         property int nNumber: number
         height: idCol2.height
 
@@ -200,8 +196,8 @@ Item {
           id: idQuizListRow
           width: parent.width - 2 * nFontSizeLarge
           TextListLarge {
-            Layout.fillWidth: true
             id: idCol2
+            Layout.fillWidth: true
             Layout.horizontalStretchFactor: 6
             text: quizname
           }
@@ -218,9 +214,9 @@ Item {
 
           TextListLarge {
             id: idCol4
-            Layout.preferredWidth: nXXxXX*1.5
+            Layout.preferredWidth: nXXxXX * 1.5
             //  Layout.horizontalStretchFactor: 1
-           // Layout.fillWidth: true
+            // Layout.fillWidth: true
             // width: nXXxXX
             text: state1
           }
@@ -235,15 +231,15 @@ Item {
           //  width: idCol4.height
           source: "qrc:rm.png"
           onClicked: {
-            idDeleteConfirmationDlg.sQuizToDelete = quizname
-            idDeleteConfirmationDlg.nNumber = number
-            idDeleteConfirmationDlg.visible = true
+            idDeleteConfirmationDlg.sQuizToDelete = quizname;
+            idDeleteConfirmationDlg.nNumber = number;
+            idDeleteConfirmationDlg.visible = true;
           }
         }
         MouseArea {
           anchors.fill: idQuizListRow
           onClicked: {
-            idQuizList.currentIndex = index
+            idQuizList.currentIndex = index;
           }
         }
       }
@@ -283,14 +279,14 @@ Item {
       anchors.rightMargin: 10
       onClicked: {
         db.transaction(function (tx) {
-          tx.executeSql('DELETE FROM GlosaDbIndex WHERE dbnumber = ?', [idDeleteConfirmationDlg.nNumber])
-          tx.executeSql('DROP TABLE Glosa' + idDeleteConfirmationDlg.nNumber)
-          tx.executeSql('DELETE FROM GlosaDbDesc WHERE dbnumber = ?', [idDeleteConfirmationDlg.nNumber])
-        })
+          tx.executeSql('DELETE FROM GlosaDbIndex WHERE dbnumber = ?', [idDeleteConfirmationDlg.nNumber]);
+          tx.executeSql('DROP TABLE Glosa' + idDeleteConfirmationDlg.nNumber);
+          tx.executeSql('DELETE FROM GlosaDbDesc WHERE dbnumber = ?', [idDeleteConfirmationDlg.nNumber]);
+        });
 
-        idGlosModelIndex.remove(MyDownloader.indexFromGlosNr(idGlosModelIndex, idDeleteConfirmationDlg.nNumber))
+        idGlosModelIndex.remove(MyDownloader.indexFromGlosNr(idGlosModelIndex, idDeleteConfirmationDlg.nNumber));
 
-        idDeleteConfirmationDlg.visible = false
+        idDeleteConfirmationDlg.visible = false;
       }
     }
   }
@@ -304,13 +300,13 @@ Item {
     onCloseClicked: idExport.visible = false
     onVisibleChanged: {
       if (visible)
-        idWindow.oPopDlg = idExport
+        idWindow.oPopDlg = idExport;
       else
-        idWindow.oPopDlg = undefined
+        idWindow.oPopDlg = undefined;
     }
 
     function closeThisDlg() {
-      visible = false
+      visible = false;
     }
 
     WhiteText {
@@ -354,8 +350,8 @@ Item {
       anchors.right: idUpdateBtn.left
       anchors.rightMargin: 10
       onClicked: {
-        QuizLib.updateDesc1(idTextInputQuizDesc.displayText)
-        idExport.visible = false
+        QuizLib.updateDesc1(idTextInputQuizDesc.displayText);
+        idExport.visible = false;
       }
     }
 
@@ -367,10 +363,9 @@ Item {
       anchors.right: idExportBtn.left
       anchors.rightMargin: 10
       onClicked: {
-        bProgVisible = true
-        QuizLib.updateDesc1(idTextInputQuizDesc.displayText)
-        MyDownloader.updateCurrentQuiz(glosModel, sQuizName, sLangLang, idTextInputQuizPwd.displayText,
-                                       idTextInputQuizDesc.displayText, idProgressUpload)
+        bProgVisible = true;
+        QuizLib.updateDesc1(idTextInputQuizDesc.displayText);
+        MyDownloader.updateCurrentQuiz(glosModel, sQuizName, sLangLang, idTextInputQuizPwd.displayText, idTextInputQuizDesc.displayText, idProgressUpload);
       }
     }
 
@@ -382,10 +377,9 @@ Item {
       anchors.right: parent.right
       anchors.rightMargin: 10
       onClicked: {
-        QuizLib.updateDesc1(idTextInputQuizDesc.displayText)
-        MyDownloader.exportCurrentQuiz(glosModel, sQuizName, sLangLang, idTextInputQuizPwd.displayText,
-                                       idTextInputQuizDesc.displayText, idProgressUpload)
-        bProgVisible = true
+        QuizLib.updateDesc1(idTextInputQuizDesc.displayText);
+        MyDownloader.exportCurrentQuiz(glosModel, sQuizName, sLangLang, idTextInputQuizPwd.displayText, idTextInputQuizDesc.displayText, idProgressUpload);
+        bProgVisible = true;
       }
     }
 
@@ -408,12 +402,12 @@ Item {
     width: parent.width
     height: parent.height
     onStateChanged: {
-      idWindow.bDownloadNotVisible = (state === "")
+      idWindow.bDownloadNotVisible = (state === "");
 
       if (idWindow.bDownloadNotVisible) {
-        idWindow.oPopDlg = undefined
+        idWindow.oPopDlg = undefined;
       } else {
-        idWindow.oPopDlg = idImport
+        idWindow.oPopDlg = idImport;
       }
     }
   }
@@ -434,7 +428,7 @@ Item {
       anchors.top: idErrorDialog.bottomClose
     }
     onCloseClicked: {
-      idErrorDialog.visible = false
+      idErrorDialog.visible = false;
     }
   }
 
@@ -449,7 +443,7 @@ Item {
       number: 0
     }
     Component.onCompleted: {
-      oFilteredQListModel = MyDownloader.setFilterProxy(idServerQModel)
+      oFilteredQListModel = MyDownloader.setFilterProxy(idServerQModel);
     }
   }
 }

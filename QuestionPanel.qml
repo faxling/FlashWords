@@ -1,4 +1,5 @@
-import QtQuick
+﻿import QtQuick
+import QtQuick.Controls
 import "qrc:QuizFunctions.js" as QuizLib
 
 Flipable {
@@ -31,7 +32,7 @@ Flipable {
       anchors.top: idImageAllok.bottom
       anchors.topMargin: 20
       onClicked: {
-        QuizLib.resetQuiz()
+        QuizLib.resetQuiz();
       }
     }
 
@@ -59,9 +60,9 @@ Flipable {
         bIsPushed: bTextMode
         source: "qrc:edit.png"
         onClicked: {
-          bTextMode = !bTextMode
+          bTextMode = !bTextMode;
           if (bTextMode) {
-            MyDownloader.focusOnQuizText(nQuizIndex1_3)
+            MyDownloader.focusOnQuizText(nQuizIndex1_3);
           }
         }
       }
@@ -95,23 +96,36 @@ Flipable {
         anchors.topMargin: 20
         bIsPushed: bCarMode
         source: "qrc:car.svg"
-        onClicked:
-        {
-          bCarMode = !bCarMode
-          if (bCarMode)
-          {
-            QuizLib.playQuestion()
-            idCarTimer.start()
-          }
-          else
-          {
-            idCarTimerPlayAnswer.stop()
-            idCarTimerPlayQuestion.stop()
-            idCarTimer.stop()
-          }
-        }
+        onClicked: QuizLib.handleClickCarMode()
       }
+      Slider {
+        id: idCarSpeedSlider
+        handle: Rectangle {
+          x: idCarSpeedSlider.leftPadding + idCarSpeedSlider.visualPosition * (idCarSpeedSlider.availableWidth - width)
+          y: idCarSpeedSlider.topPadding + idCarSpeedSlider.availableHeight / 2 - height / 2
+          implicitWidth: 40
+          implicitHeight: 40
+          radius: 20
+          color: idCarSpeedSlider.pressed ? "#f0f0f0" : "#f6f6f6"
+          border.color: "#bdbebf"
+        }
+        stepSize: 1
 
+        visible: bCarMode
+        anchors.top: idImgBtn.bottom
+        anchors.topMargin: 20
+        anchors.right: idCarBtn.left
+        anchors.left: parent.left
+        onPressedChanged: {
+          bCarModeSlider = pressed;
+        }
+        from: 3
+        to: 10
+        onValueChanged: QuizLib.handleCarSlider(value)
+        // Trick to update 3 sliders from one value
+        property int nCarModeSpeed2: nCarModeSpeed
+        onNCarModeSpeed2Changed: value = nCarModeSpeed
+      }
       Text {
         id: idTextExtra
         font.pointSize: 12
@@ -126,8 +140,7 @@ Flipable {
         id: idTextEditYourAnswer
         focus: true
 
-        Component.onCompleted: MyDownloader.storeTextInputField(
-                                 number, idTextEditYourAnswer)
+        Component.onCompleted: MyDownloader.storeTextInputField(number, idTextEditYourAnswer)
 
         y: 50
         anchors.horizontalCenter: parent.horizontalCenter
@@ -136,9 +149,9 @@ Flipable {
         width: parent.width - 150
         placeholderText: "your answer"
         onDisplayTextChanged: {
-          bTextAnswerOk = QuizLib.isAnswerOk(displayText, answer)
+          bTextAnswerOk = QuizLib.isAnswerOk(displayText, answer);
           if (bTextAnswerOk)
-            QuizLib.setAnswerVisible()
+            QuizLib.setAnswerVisible();
         }
       }
 
@@ -147,8 +160,7 @@ Flipable {
         anchors.rightMargin: 20
         y: idBtnAnswer.y + idQuizColumn.y
         source: "qrc:horn.png"
-        onClicked: MyDownloader.playWord(question,
-                                         bIsReverse ? sToLang : sFromLang)
+        onClicked: MyDownloader.playWord(question, bIsReverse ? sToLang : sFromLang)
       }
 
       Column {
@@ -188,7 +200,7 @@ Flipable {
           source: "qrc:flip.png"
           anchors.horizontalCenter: parent.horizontalCenter
           onClicked: {
-            QuizLib.toggleAnswerVisible()
+            QuizLib.toggleAnswerVisible();
           }
         }
       }

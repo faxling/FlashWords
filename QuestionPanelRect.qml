@@ -1,5 +1,5 @@
-import QtQuick
-
+﻿import QtQuick
+import "qrc:QuizFunctions.js" as QuizLib
 Rectangle {
   radius: 10
   anchors.fill: parent
@@ -15,8 +15,7 @@ Rectangle {
     anchors.rightMargin: 20
     source: "qrc:r.png"
     onClicked: {
-      // bMoving = true
-      idTakeQuizView.decIndex()
+      QuizLib.decIndex()
     }
   }
 
@@ -28,8 +27,7 @@ Rectangle {
     anchors.leftMargin: 20
     source: "qrc:left.png"
     onClicked: {
-      //bMoving = true
-      idTakeQuizView.incIndex()
+      QuizLib.incIndex()
     }
   }
 }

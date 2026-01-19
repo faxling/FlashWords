@@ -1,4 +1,4 @@
-#include "..\harbour-wordquiz\src\crosswordq.h"
+﻿#include "..\harbour-wordquiz\src\crosswordq.h"
 #include "..\harbour-wordquiz\src\filehelpers.h"
 #include "..\harbour-wordquiz\src\speechdownloader.h"
 #include "..\harbour-wordquiz\src\svgdrawing.h"
@@ -88,7 +88,8 @@ public:
     qDebug() << "end wordquiz";
 #ifndef Q_OS_ANDROID
     QFile oGeometry(m_sPath);
-    oGeometry.open(QIODevice::ReadWrite);
+    if (oGeometry.open(QIODevice::ReadWrite) == false)
+      return;
     QDataStream ss(&oGeometry);
     ss << m_p->geometry();
     oGeometry.close();
@@ -179,6 +180,7 @@ int main(int argc, char* argv[])
   QCoreApplication::setOrganizationName("softax");
   QGuiApplication app(argc, argv);
   QtWebView::initialize();
+
   Engine engine;
   qDebug() << "Qt database drivers " << QSqlDatabase::drivers();
   engine.addImageProvider("theme", new DefImg());

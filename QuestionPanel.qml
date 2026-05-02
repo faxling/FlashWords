@@ -196,7 +196,6 @@ Flipable {
         ButtonQuizImgLarge {
           id: idBtnAnswer
           focus: false
-          //        fillMode: Image.Pad
           source: "qrc:flip.png"
           anchors.horizontalCenter: parent.horizontalCenter
           onClicked: {

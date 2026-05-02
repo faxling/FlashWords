@@ -10,8 +10,7 @@ Item {
   property bool bImageMode: false
   property bool bCarMode: false
   property bool bCarModeSlider: false
-  property int nCarModeSpeed: 7
-  property int nDurationPlayedWord
+  property int  nCarModeSpeed: 7
   property bool bVoiceMode: false
   property bool bTextAnswerOk: false
 

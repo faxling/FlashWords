@@ -80,14 +80,6 @@ Item {
           idImport.showPane();
         }
       }
-
-      /*
-      TextList
-      {
-        id:idLangPair
-        text:sLangLangSelected
-      }
-      */
     }
 
     Row {
@@ -177,14 +169,6 @@ Item {
 
       onCurrentItemChanged: {
         QuizLib.loadFromQuizList();
-
-        /*
-        if (nGlosaDbLastIndex >= 0)
-          QuizLib.loadFromQuizList()
-        else
-          nGlosaDbLastIndex = 0;
-
-          */
       }
 
       delegate: Item {

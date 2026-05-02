@@ -1,4 +1,4 @@
-import QtQuick
+﻿import QtQuick
 
 Rectangle {
   id: idDlgPopup
@@ -21,13 +21,9 @@ Rectangle {
       return
 
     if (visible)
-    {
       idWindow.oPopDlg = idDlgPopup
-    }
     else
-    {
       idWindow.oPopDlg = undefined
-    }
   }
 
   signal closeClicked

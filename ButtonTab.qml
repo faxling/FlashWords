@@ -1,12 +1,10 @@
-import QtQuick 2.5
+﻿import QtQuick 2.5
 import QtQuick.Controls 2.2
 
 
 TabButton {
   id: control2
-
   property int nFontHeight : t_metrics.height
-
 
   TextMetrics {
     id: t_metrics

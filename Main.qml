@@ -85,8 +85,6 @@ Window {
   property bool bCWBusy: false
   
   property var glosModelIndex
-  // property int nGlosaDbLastIndex:  -1
-  //  color: "#E5E7E9"
   property int nGlosaTakeQuizIndex: -1
   property int nLastIndexMainX: 0
   FontLoader {
@@ -98,7 +96,6 @@ Window {
   function loadInView(sTitle, sUrl) {
     idWebEngineView.url = sUrl
     sWebViewTitle = sTitle
-    // idWebEngineView.title = sTitle
     if (idSwipeView.currentIndex !== 5) {
       nLastIndex = idSwipeView.currentIndex
       idSwipeView.currentIndex = 5
@@ -286,14 +283,6 @@ Window {
     }
   }
   
-  
-  /*
-  TextList
-  {
-    text: sQuizName + " " + sLangLang + " " + sScoreText
-    anchors.horizontalCenter: parent.horizontalCenter
-  }
-  */
   TabBar {
     id: idTabMain
     clip: true

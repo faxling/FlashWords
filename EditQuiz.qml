@@ -1,4 +1,4 @@
-import QtQuick
+﻿import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Dialogs
@@ -350,8 +350,6 @@ Item {
             idTextEdit1.text = question
             idTextEdit2.text = answer
             idTextEdit3.text = extra
-            // idEditWordImage.visible = MyDownloader.hasImage(idTextEdit1.text,
-            //                                                 sLangLang)
             idEditWordImage.source = MyDownloader.imageSrc(idTextEdit1.text,
                                                            sLangLang)
             idGlosState.checked = state1 !== 0

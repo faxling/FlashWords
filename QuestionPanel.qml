@@ -109,7 +109,8 @@ Flipable {
           color: idCarSpeedSlider.pressed ? "#f0f0f0" : "#f6f6f6"
           border.color: "#bdbebf"
         }
-        stepSize: 1
+
+        //stepSize: 1
 
         visible: bCarMode
         anchors.top: idImgBtn.bottom
@@ -119,12 +120,12 @@ Flipable {
         onPressedChanged: {
           bCarModeSlider = pressed;
         }
-        from: 3
+        from: 1
         to: 10
         onValueChanged: QuizLib.handleCarSlider(value)
         // Trick to update 3 sliders from one value
-        property int nCarModeSpeed2: nCarModeSpeed
-        onNCarModeSpeed2Changed: value = nCarModeSpeed
+        property real nCarModeSpeed2: fCarModeSpeed1_10
+        onNCarModeSpeed2Changed: value = nCarModeSpeed2
       }
       Text {
         id: idTextExtra

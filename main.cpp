@@ -37,6 +37,7 @@
 // }
 
 // \etc\systemd\system\reverso-node-app.service
+// systemctl enable reverso-node-app
 //
 
 /*

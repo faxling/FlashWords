@@ -10,7 +10,7 @@ Item {
   property bool bImageMode: false
   property bool bCarMode: false
   property bool bCarModeSlider: false
-  property int  nCarModeSpeed: 7
+  property real fCarModeSpeed1_10: 5.5
   property bool bVoiceMode: false
   property bool bTextAnswerOk: false
 
@@ -27,7 +27,7 @@ Item {
 
   Timer {
     id: idCarTimer
-    interval: (10 - nCarModeSpeed) * 1000 + 4000
+    interval: (10 - fCarModeSpeed1_10) * 900 + 2000
     repeat: true
     onTriggered: QuizLib.exeCarMode()
   }

@@ -79,7 +79,6 @@ Window {
   property variant quizListView
   property variant oTakeQuiz
   property variant oPopDlg
-  property bool bAllok: false
   property bool bDownloadNotVisible: true
   property bool bCWBusy: false
 

@@ -22,7 +22,7 @@ Item {
     id: idMoveTimer
     interval: 500
     repeat: false
-    onTriggered: QuizLib.handleMovmentEnded(false)
+    onTriggered: QuizLib.handleMovmentEnded()
   }
 
   Timer {
@@ -33,10 +33,18 @@ Item {
   }
 
   Keys.onLeftPressed: {
+    if (bCarMode) {
+      idCarTimer.stop();
+    }
+
     QuizLib.incIndex();
   }
 
   Keys.onRightPressed: {
+    if (bCarMode) {
+      idCarTimer.stop();
+    }
+
     QuizLib.decIndex();
   }
   Keys.onSpacePressed: {
@@ -69,8 +77,7 @@ Item {
       QuizLib.handleMovmentStarted();
     }
     onMovementEnded: {
-      // Manual movement = true
-      QuizLib.handleMovmentEnded(true);
+      QuizLib.handleMovmentEnded();
     }
 
     model: idQuizModel

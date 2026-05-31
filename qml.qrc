@@ -1,5 +1,6 @@
 ﻿<RCC>
     <qresource prefix="/">
+        <file>kids_cheering_short.mp3</file>
         <file>dline.svg</file>
         <file>edit.svg</file>
         <file>gubbe.svg</file>

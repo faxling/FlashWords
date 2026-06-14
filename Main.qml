@@ -252,7 +252,7 @@ Window {
       source: idSwipeView.currentIndex === 5 ? "qrc:quit.png" : "qrc:help.png"
       onClicked: {
         // Special tool to get html !
-        loadInView("Instructions v1.2.3", "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html");
+        loadInView("Instructions v1.2.4", "https://htmlpreview.github.io/?https://github.com/faxling/FlashWords/blob/main/doc/doc.html");
       }
     }
 

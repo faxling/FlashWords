@@ -1,6 +1,6 @@
 ﻿<RCC>
     <qresource prefix="/">
-        <file>kids_cheering_short.mp3</file>
+
         <file>dline.svg</file>
         <file>edit.svg</file>
         <file>gubbe.svg</file>
@@ -50,6 +50,7 @@
         <file>doc/Jul Franska.txt</file>
         <file alias="CrossWordFunctions.js">../harbour-wordquiz/qml/CrossWordFunctions.js</file>
         <file alias="QuizFunctions.js">../harbour-wordquiz/qml/QuizFunctions.js</file>
+        <file alias="kids_cheering_short.mp3">../harbour-wordquiz/kids_cheering_short.mp3</file>
     </qresource>
     <qresource prefix="/qml">
         <file>ButtonQuiz.qml</file>
